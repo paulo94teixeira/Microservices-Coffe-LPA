@@ -11,18 +11,19 @@ desenvolvimento de arquitetura baseadas em micro-serviços.
 
 ## Recursos
 ```
-• Vert.x
+• Minikube
+• Kubernetes
 • GIT Server (qualquer)
 • Google Cloud Platform (ou alternativa semelhante disponível publicamente)
-• Docker
-• Vagrant
+• Opções para o desenvolvimento dos microserviços (Vert.x, SeedStack, Spring Boot, JHypster, etc)
 ```
 
 ## Procedimentos
 ```
-• De acordo com as instruções fornecidas nas aulas, deverá garantir a correta instalação e
+De acordo com as instruções fornecidas nas aulas, deverá garantir a correta instalação e
 configuração do ambiente de desenvolvimento usando as tecnologias:
 o Vagrant
+o Git
 • Deverão conceber a aplicação com um serviço que forneça pelo menos um dataset para
 reporting em JSON.
 ```
