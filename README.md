@@ -1,7 +1,5 @@
-# Microservices-Coffe-LPA
+# Microservices-Coffe-LPA Project ESTG IPP
 
-## Métodos e Técnicas de Suporte ao Desenvolvimento de Software
-## Enunciado do Projeto
 ## Objetivos
 ```
 • Conceber a arquitetura técnica de um projeto segundo o paradigma micro-serviços;
