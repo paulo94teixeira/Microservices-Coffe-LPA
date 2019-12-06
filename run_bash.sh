@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+mvn clean install
+
+cd api_gateway
+java -jar target/api_gateway-1.0-fat.jar start -id api_gateway -cluster -conf src/main/config/config.json --redirect-output
+cd ..
+
+cd login
+java -jar target/login-1.0-fat.jar start -id login -cluster -conf src/main/config/config.json --redirect-output
+cd ..
+
+cd registar_user
+java -jar target/registar_user-1.0-fat.jar start -id registar_user -cluster -conf src/main/config/config.json --redirect-output
+cd ..
+
