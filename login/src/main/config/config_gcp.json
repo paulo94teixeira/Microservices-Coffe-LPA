@@ -2,6 +2,6 @@
   "local":true,
   "host": "localhost",
   "port": 8080,
-  "db_name": "utilizador_login",
+  "db_name": "login",
   "connection_string": "mongodb://192.168.4.244:27017"
 }

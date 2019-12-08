@@ -42,12 +42,14 @@ public class MainVerticle extends AbstractVerticle {
         JsonObject user_json = new JsonObject(consumerEvent.body().toString());
         JsonObject user_data = new JsonObject(user_json.getJsonObject("json_obj").toString());
         String password = user_data.getString("password");
+		String type = user_data.getString("type");
         String username = user_data.getString("username");
         String id = user_data.getString("id");
 
         mongo.save(COLLECTION, new JsonObject()
             .put("password", password)
             .put("username",username)
+            .put("type", type)
             .put("id",id),  
             AsyncResult::result);
     }

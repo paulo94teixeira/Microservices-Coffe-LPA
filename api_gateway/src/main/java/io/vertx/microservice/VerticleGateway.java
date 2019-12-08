@@ -104,11 +104,11 @@ public class VerticleGateway extends AbstractVerticle {
         Session session = ctx.session();
         String id = session.get("id");
         String username = session.get("username");
-        String email = session.get("email");
+        String type = session.get("type");
 
         JsonObject message = new JsonObject();
         message.put("username", username);
-        message.put("email", email);
+        message.put("type", type);
         message.put("id", id);
 
         if (id == null || id.isEmpty()) {
@@ -121,32 +121,14 @@ public class VerticleGateway extends AbstractVerticle {
         ctx.response().end(message.encode());
     }
 
-    private void updateUser(RoutingContext ctx) {
-        logger.info("Update User ");
-        // update the user properties
-        JsonObject update = ctx.getBodyAsJson();
-        JsonObject message = updateEntity(ctx, update);
-        vertx.eventBus().send("/api/getUserData/:id-put", message, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
-    }
-
-    private JsonObject updateEntity(RoutingContext ctx, JsonObject update) {
-        JsonObject message = new JsonObject();
-        message.put("username", update.getString("username"));
-        message.put("email", update.getString("email"));
-        message.put("telefone", update.getString("telefone"));
-        message.put("morada", update.getString("morada"));
-        message.put("id", ctx.request().getParam("id"));
-        return message;
-    }
-
     private void novoRegistoUser(RoutingContext ctx) {
-        logger.info("efetuar novo registo ");
+        logger.info("Efetuar novo registo ");
         JsonObject newUser = ctx.getBodyAsJson();
         vertx.eventBus().send("/api/registo-post", newUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
 
     private void efetuarLogin(RoutingContext ctx) {
-        logger.info("efetuar login api");
+        logger.info("Efetuar login api");
         JsonObject loginUser = ctx.getBodyAsJson();
         if (loginUser == null) {
             // bad request
@@ -175,7 +157,7 @@ public class VerticleGateway extends AbstractVerticle {
                 Session session = ctx.session();
                 session.put("id", jsonObject.getString("id_user"));
                 session.put("username", user_data_json.getString("username"));
-                session.put("email", user_data_json.getString("email"));
+                session.put("type", user_data_json.getString("type"));
             }
             logger.info("Respondeu cliente ----" + user);
             ctx.response()

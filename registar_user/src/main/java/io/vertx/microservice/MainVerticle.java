@@ -91,21 +91,20 @@ public class MainVerticle extends AbstractVerticle {
 
     private JsonObject validateUser(JsonObject newUser) {
         String username = newUser.getString("username");
+		String type = newUser.getString("type");
         String password = newUser.getString("password");
-        String confirm_password = newUser.getString("confirm_password");
+        String password2 = newUser.getString("password2");
 
         logger.info("Validar Registo utilizador");
-        if (username != null && password != null && confirm_password != null) {
-            if (username.length() > 4 && password.length() > 4 && confirm_password.length() > 4) {
+        if (username != null && password != null && password2 != null) {
+            if (username.length() > 4 && password.length() > 4 && password2.length() > 4) {
                    if (!password.contains(" ")) {
-                        if (password.equals(confirm_password)) {
+                        if (password.equals(password2)) {
                             logger.info("Utilizador Validado");
+							newUser.put("type", type);
                             newUser.put("password", encodePasswordWithMd5(password));
-                            newUser.put("data", "");
-                            newUser.put("morada", "");
-                            newUser.put("telefone", "");
+						    newUser.put("data", "");
                             newUser.put("created_at", getTodayDateAndTime());
-                            newUser.put("tipo_utilizador", "free");
 
                             return new JsonObject().put("status", "1").put("user_add", newUser.encode());
                         } else {

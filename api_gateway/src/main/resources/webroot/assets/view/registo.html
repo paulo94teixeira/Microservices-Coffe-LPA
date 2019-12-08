@@ -7,11 +7,11 @@
                 <label style="color: white" >Username:</label>
                 <input class="form-control" type="text" ng-model="user.username" required />
             </div>
-			<div class="form-group">
+			<div  class="form-group">
 			<label style="color: white" >Type of user:</label>
-			<select class="browser-default custom-select">
-				<option ng-model="user.type1" value="1">Employee</option>
-				<option ng-model="user.type2" value="2">Stock Administrator</option>
+			<select ng-model="user.type" class="browser-default custom-select">
+				<option  value="1">Employee</option>
+				<option  value="2">Stock Administrator</option>
 			</select>
 			</div>
             <div class="form-group">
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label style="color: white" >Confirm Password:</label>
-                <input class="form-control" type="password" ng-model="user.confirm_password" required />
+                <input class="form-control" type="password" ng-model="user.password2" required />
             </div>
             <button class="btn btn-primary" ng-disabled="AddNewFormRegisto.$invalid || isUnchanged(user)" id="add-new-btn" ng-click="add_new_registo(user)">Save!</button>
             <a href="#/" style="color: white" class="btn">Cancel</a>
