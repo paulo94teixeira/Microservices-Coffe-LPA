@@ -1,4 +1,4 @@
-# Microservices-Coffe-LPA Project ESTG IPP
+# Microservices-Coffe-LPA Project MEI ESTG IPP MTADS
 
 ## Objetivos
 ```
@@ -13,9 +13,9 @@ desenvolvimento de arquitetura baseadas em micro-serviços.
 ```
 • Minikube
 • Kubernetes
-• GIT Server (qualquer)
-• Google Cloud Platform (ou alternativa semelhante disponível publicamente)
-• Opções para o desenvolvimento dos microserviços (Vert.x, SeedStack, Spring Boot, JHypster, etc)
+• Git Hub
+• Google Cloud Platform
+• Opções para o desenvolvimento dos microserviços (Vert.x)
 ```
 
 ## Procedimentos
