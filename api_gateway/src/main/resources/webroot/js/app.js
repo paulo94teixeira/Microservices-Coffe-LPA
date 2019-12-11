@@ -30,7 +30,7 @@ vertxApp.config(['$routeProvider', function ($routeProvider) {
 
 function getAllMainList($scope, $http) {
      $scope.album_music = [];
-     $scope.categorias = [];
+     $scope.products = [];
      $scope.albuns = [];
 
      $http({
@@ -49,11 +49,11 @@ function getAllMainList($scope, $http) {
     var fetchPageOnSucessLogin = function () {
         $scope.album_music = [];
         $scope.albuns = [];
-        $scope.categorias = [];
+        $scope.products = [];
         $scope.albuns_backup = [];
 
-        $http.get('/api/getCategorias').success(function (data) {
-            $scope.categorias = data;
+        $http.get('/api/getProducts').success(function (data) {
+            $scope.products = data;
         });
 
         $http.get('/api/getAlbuns').success(function (data) {
@@ -79,12 +79,12 @@ function getAllMainList($scope, $http) {
             });
         };
 
-        $scope.get_album_by_categoria = function (categoria_id) {
+        $scope.get_all_products = function (product_id) {
             var albuns_temp = $scope.albuns_backup;
             $scope.albuns = [];
  
             $.each(albuns_temp, function (key, val) {
-                if( val.categoria == categoria_id){
+                if( val.product == product_id){
                     $scope.albuns.push(val);
                 }
             });

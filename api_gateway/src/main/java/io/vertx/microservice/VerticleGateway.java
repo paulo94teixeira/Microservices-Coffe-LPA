@@ -54,6 +54,7 @@ public class VerticleGateway extends AbstractVerticle {
         router.post("/api/registo").handler(this::novoRegistoUser);
         router.post("/api/login").handler(this::efetuarLogin);
         router.post("/logout").handler(this::logoutHandler);
+        router.get("/api/getProducts").handler(this::getProducts);
 
         //get session user DATA
         router.get("/api/getSessionUser").handler(this::getSessionUserData);
@@ -137,6 +138,11 @@ public class VerticleGateway extends AbstractVerticle {
         }
 
         vertx.eventBus().send("/api/login-post", loginUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> login_user_handler(ctx, responseHandler));
+    }
+
+    private void getProducts(RoutingContext ctx) {
+        logger.info("Get all products ");
+        vertx.eventBus().send("/api/getProducts-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
 
     private void login_user_handler(RoutingContext ctx, AsyncResult<Message<String>> responseHandler) {

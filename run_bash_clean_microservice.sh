@@ -11,3 +11,7 @@ cd ..
 cd login
 java -jar target/login-1.0-fat.jar stop login
 cd ..
+
+cd get_products
+java -jar target/get_products-1.0-fat.jar stop get_products
+cd ..
