@@ -5,5 +5,24 @@
 				<a ng-click="get_all_products(product.id)" class="list-group-item list-group-item-action bg-light">{{product.product}}</a>
 			</div>
     </div>
+	<div>
+	<div align="left" id="sidebar-mesa">
+	<form id="paper" method="get" action="">	
+		<textarea rows='40' placeholder='Products by table'></textarea>
+		<input id="buttonMesa" type="submit" value="Pay build">
+	</form>
 </div>
+	<div id="wrapper">    
+				<div ng-repeat="table in tables">
+				<a ng-click="get_all_tables(table.id)" class="example-1">{{table.table}}</a>
+			</div>
+	</div>
+
+
+
+</div>
+</div>
+
+
+
 

@@ -15,3 +15,7 @@ cd ..
 cd get_products
 java -jar target/get_products-1.0-fat.jar stop get_products
 cd ..
+
+cd get_tables
+java -jar target/get_tables-1.0-fat.jar stop get_tables
+cd ..

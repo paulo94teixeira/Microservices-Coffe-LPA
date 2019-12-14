@@ -16,3 +16,7 @@ cd ..
 cd get_products
 java -jar target/get_products-1.0-fat.jar start -id get_products -cluster -conf src/main/config/config.json --redirect-output
 cd ..
+
+cd get_tables
+java -jar target/get_tables-1.0-fat.jar start -id get_tables -cluster -conf src/main/config/config.json --redirect-output
+cd ..
