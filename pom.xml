@@ -13,6 +13,8 @@
     <module>api_gateway</module>
     <module>registar_user</module>
     <module>login</module>
+    <module>get_products</module>
+    <module>get_tables</module>
   </modules>
 
   <properties>
