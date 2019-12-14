@@ -38,7 +38,6 @@ public class VerticleGateway extends AbstractVerticle {
     protected CircuitBreaker circuitBreaker;
     protected Set<Record> registeredRecords = new ConcurrentHashSet<>();
 
-
     @Override
     public void start(Future<Void> future) throws Exception {
         super.start();
@@ -56,10 +55,9 @@ public class VerticleGateway extends AbstractVerticle {
         router.post("/logout").handler(this::logoutHandler);
         router.get("/api/getProducts").handler(this::getProducts);
         router.get("/api/getTables").handler(this::getTables);
-		router.get("/api/getMenus").handler(this::getMenus);
-		router.get("/api/reporting").handler(this::getAllReportingData);
-		
-		
+        router.get("/api/getMenus").handler(this::getMenus);
+        router.get("/api/reporting").handler(this::getAllReportingData);
+
         //get session user DATA
         router.get("/api/getSessionUser").handler(this::getSessionUserData);
 
@@ -91,12 +89,10 @@ public class VerticleGateway extends AbstractVerticle {
      *
      * @param router router instance
      */
-
     private void getAllReportingData(RoutingContext ctx) {
         vertx.eventBus().send("/api/reporting", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
-	
-	
+
     protected void enableLocalSession(Router router) {
         router.route().handler(CookieHandler.create());
         router.route().handler(BodyHandler.create());
@@ -158,12 +154,12 @@ public class VerticleGateway extends AbstractVerticle {
         logger.info("Get all tables ");
         vertx.eventBus().send("/api/getTables-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
-	
-	    private void getMenus(RoutingContext ctx) {
+
+    private void getMenus(RoutingContext ctx) {
         logger.info("Get all menus ");
         vertx.eventBus().send("/api/getMenus-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
-    }	
-	
+    }
+
     private void login_user_handler(RoutingContext ctx, AsyncResult<Message<String>> responseHandler) {
 
         logger.info("Handler Login, create session");
@@ -186,8 +182,8 @@ public class VerticleGateway extends AbstractVerticle {
             }
             logger.info("Respondeu cliente ----" + user);
             ctx.response()
-            .putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-            .end(result.body());
+                    .putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .end(result.body());
 
         }
     }
@@ -197,9 +193,9 @@ public class VerticleGateway extends AbstractVerticle {
         Session session = ctx.session();
         String id = session.get("id");
         String id_user;
-        if( id.isEmpty()){
+        if (id.isEmpty()) {
             id_user = ctx.request().getParam("id");
-        }else{
+        } else {
             id_user = id;
         }
         logger.info("procura dados utilizador" + id_user);
@@ -222,15 +218,12 @@ public class VerticleGateway extends AbstractVerticle {
     /*
     *  Fim Métodos para a API Gateway
      */
-    
-
     /**
      * metodo para publicar MENSAGEM no eventbus, quando é iniciado a APIGateway
      *
      * @param type log type
      * @param data log message data
      */
-
     private void publishGatewayLog(String info) {
         JsonObject message = new JsonObject()
                 .put("info", info)
@@ -298,13 +291,10 @@ public class VerticleGateway extends AbstractVerticle {
     }
 
     /*
-    * #####################################
-    *               FILL DATABASE
-    * ######################################
+    *FILL DATABASE
      */
-
     private void insert_to_db(String COLLECTION, JsonObject toJson, MongoClient mongo) {
-        
+
         mongo.insert(COLLECTION, toJson, ar -> {
             if (ar.failed()) {
                 logger.warn("fail ao inserir");
@@ -312,17 +302,9 @@ public class VerticleGateway extends AbstractVerticle {
         });
     }
 
-      
-
-    /*
-    * #####################################
-    *               FILL DATABASE
-    * ######################################
-     */
     private String getTodayDateAndTime() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
-        return dateFormat.format(date); //2016/11/16 12:08:43
+        return dateFormat.format(date);
     }
-
 }

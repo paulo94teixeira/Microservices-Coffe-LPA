@@ -19,13 +19,13 @@ public class MainVerticle extends AbstractVerticle {
     public static final String EVENT_ADRESS = "user_created";
     public static final String EVENT_ADRESS_LOGIN = "user_login";
     private EventBus eventBus;
-    
+
     private MongoClient mongo;
 
     @Override
     public void start(Future<Void> startFuture) throws Exception {
         //init Mongo estancia e get colletion
-        InitMongoDB db_configuration = new InitMongoDB(vertx,config());
+        InitMongoDB db_configuration = new InitMongoDB(vertx, config());
         mongo = db_configuration.initMongoData();
         COLLECTION = db_configuration.getCOLLECTION();
 
@@ -34,7 +34,7 @@ public class MainVerticle extends AbstractVerticle {
         this.eventBus.consumer("/api/login-post", getUserLogin());
 
         this.eventBus.consumer(EVENT_ADRESS, this::getEventAndSaveInDb);
-        
+
     }
 
     private <T> void getEventAndSaveInDb(Message<T> consumerEvent) {
@@ -42,22 +42,21 @@ public class MainVerticle extends AbstractVerticle {
         JsonObject user_json = new JsonObject(consumerEvent.body().toString());
         JsonObject user_data = new JsonObject(user_json.getJsonObject("json_obj").toString());
         String password = user_data.getString("password");
-		String type = user_data.getString("type");
+        String type = user_data.getString("type");
         String username = user_data.getString("username");
         String id = user_data.getString("id");
 
         mongo.save(COLLECTION, new JsonObject()
-            .put("password", password)
-            .put("username",username)
-            .put("type", type)
-            .put("id",id),  
-            AsyncResult::result);
+                .put("password", password)
+                .put("username", username)
+                .put("type", type)
+                .put("id", id),
+                AsyncResult::result);
     }
 
-    public void publishOnEventBus(JsonObject jsonObject){
+    public void publishOnEventBus(JsonObject jsonObject) {
         this.eventBus.publish(EVENT_ADRESS_LOGIN, jsonObject.toString());
     }
-
 
     private Handler<Message<JsonObject>> getUserLogin() {
         return handler -> {
@@ -77,14 +76,14 @@ public class MainVerticle extends AbstractVerticle {
         JsonObject user = lookup.result();
 
         if (user == null) {
-            handlerMensagemFrontend(handler,404,"Credenciais incorretas",null,"");
+            handlerMensagemFrontend(handler, 404, "Credenciais incorretas", null, "");
         } else {
-            logger.info("Resultado Login"+user.encode());
-            handlerMensagemFrontend(handler,200,"Login Efetuado com Sucesso",user,user.getString("id"));
+            logger.info("Resultado Login" + user.encode());
+            handlerMensagemFrontend(handler, 200, "Login Efetuado com Sucesso", user, user.getString("id"));
         }
     }
-    
-    private void handlerMensagemFrontend(Message<JsonObject> handler, int status_code, String mensagem_handler, JsonObject user,String id_Code) {
+
+    private void handlerMensagemFrontend(Message<JsonObject> handler, int status_code, String mensagem_handler, JsonObject user, String id_Code) {
         //formata mensagem para enviar pro frontend
         JsonObject handlerMensagem = new JsonObject();
         handlerMensagem.put("status", status_code);
@@ -94,7 +93,7 @@ public class MainVerticle extends AbstractVerticle {
         publishOnEventBus(handlerMensagem);
         handler.reply(handlerMensagem.encode());
     }
-    
+
     private static String encodePasswordWithMd5(String input) {
         try {
 

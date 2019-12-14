@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<meta charset="UTF-8">
+        <meta charset="UTF-8">
         <title>COFFE LPA</title>
         <script src="assets/script/jquery-1.11.2.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -15,16 +15,16 @@
     <body ng-app="CrudApp">
         <!-- navbar on the top -->
         <nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation" ng-controller="HeaderCtrl">
-           <ul class="nav navbar-nav navbar-right">        
-                            <li ng-if="user.username != undefined">
-                                <span >
-                                    <span align="right" style="color: white;" ><b>Welcome, </b></span><br>
-                                    <span align="right" style="color: white;"><b>{{ user.username}}</b></span>
-                                </span>
-                            </li>
-                            <li ng-if="user.username == undefined"><a style="color: white;" href="#/registo">Register</a></li>
-                            <li ng-if="user.username == undefined"><a style="color: white;" href="#/login">Login</a></li>
-                            <li ng-if="user.username != undefined"><a style="color: white;" ng-click="logout()" href="#/login">Logout</a></li>
+            <ul class="nav navbar-nav navbar-right">        
+                <li ng-if="user.username != undefined">
+                    <span >
+                        <span style="color: white;" ><b>Welcome, </b></span><br>
+                        <span style="color: white;"><b>{{ user.username}}</b></span>
+                    </span>
+                </li>
+                <li ng-if="user.username == undefined"><a style="color: white;" href="#/registo">Register</a></li>
+                <li ng-if="user.username == undefined"><a style="color: white;" href="#/login">Login</a></li>
+                <li ng-if="user.username != undefined"><a style="color: white;" ng-click="logout()" href="#/login">Logout</a></li>
             </ul>
         </nav>
         <div id="error_msm" class="alert" style="display: none;z-index: 100;">

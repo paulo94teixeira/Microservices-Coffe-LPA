@@ -1,30 +1,30 @@
 <div class="set_backgroud_full_screen_img">
     <div class="container_center_div theme-showcase" role="main" ng-controller="RegistoCtrl">
-      <div align="center" class="jumbotron">
-        <h2 style="color: white">Register Employee</h2>
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label style="color: white" >Username:</label>
-                <input class="form-control" type="text" ng-model="user.username" required />
-            </div>
-			<div  class="form-group">
-			<label style="color: white" >Type of user:</label>
-			<select ng-model="user.type" class="browser-default custom-select">
-				<option  value="1">Employee</option>
-				<option  value="2">Stock Administrator</option>
-			</select>
-			</div>
-            <div class="form-group">
-                <label style="color: white">Password:</label>
-                <input class="form-control" type="password" ng-model="user.password" required />
-            </div>
-            <div class="form-group">
-                <label style="color: white" >Confirm Password:</label>
-                <input class="form-control" type="password" ng-model="user.password2" required />
-            </div>
-            <button class="btn btn-primary" ng-disabled="AddNewFormRegisto.$invalid || isUnchanged(user)" id="add-new-btn" ng-click="add_new_registo(user)">Save!</button>
-            <a href="#/" style="color: white" class="btn">Cancel</a>
-        </form>
+        <div align="center" class="jumbotron">
+            <h2 style="color: white">Register Employee</h2>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label style="color: white" >Username:</label>
+                    <input class="form-control" type="text" ng-model="user.username" required />
+                </div>
+                <div  class="form-group">
+                    <label style="color: white" >Type of user:</label>
+                    <select ng-model="user.type" class="browser-default custom-select">
+                        <option  value="1">Employee</option>
+                        <option  value="2">Stock Administrator</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label style="color: white">Password:</label>
+                    <input class="form-control" type="password" ng-model="user.password" required />
+                </div>
+                <div class="form-group">
+                    <label style="color: white" >Confirm Password:</label>
+                    <input class="form-control" type="password" ng-model="user.password2" required />
+                </div>
+                <button class="btn btn-primary" ng-disabled="AddNewFormRegisto.$invalid || isUnchanged(user)" id="add-new-btn" ng-click="add_new_registo(user)">Save!</button>
+                <a href="#/" style="color: white" class="btn">Cancel</a>
+            </form>
+        </div>
     </div>
-</div>
 </div>

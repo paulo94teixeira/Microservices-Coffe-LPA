@@ -1,6 +1,5 @@
 package io.vertx.microservice.util;
 
-
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
@@ -16,9 +15,9 @@ public class InitMongoDB {
         this.vertx = vertx;
         this.config = config;
         this.COLLECTION = config.getString("db_name");
-	}
+    }
 
-	public MongoClient initMongoData() {
+    public MongoClient initMongoData() {
 
         // Create a mongo client using configs
         JsonObject mongoConfig = new JsonObject()
@@ -30,7 +29,7 @@ public class InitMongoDB {
         return mongo;
     }
 
-    public String getCOLLECTION(){
+    public String getCOLLECTION() {
         return this.COLLECTION;
     }
 
