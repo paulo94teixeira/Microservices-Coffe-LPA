@@ -19,3 +19,7 @@ cd ..
 cd get_tables
 java -jar target/get_tables-1.0-fat.jar stop get_tables
 cd ..
+
+cd get_menus
+java -jar target/get_menus-1.0-fat.jar stop get_menus
+cd ..

@@ -53,6 +53,8 @@ function getAllMainList($scope, $http) {
         $scope.albuns_backup = [];
 		$scope.tables = [];
 		$scope.tables_backup = [];
+		$scope.menus = [];
+		$scope.menus_backup = [];
 
         $http.get('/api/getProducts').success(function (data) {
             $scope.products = data;
@@ -68,6 +70,11 @@ function getAllMainList($scope, $http) {
             $scope.tables_backup = data;
         });		
 
+        $http.get('/api/getMenus').success(function (data) {
+            $scope.menus = data;
+            $scope.menus_backup = data;
+        });		
+		
         $scope.get_album_musics = function (album) {
             $http({
                 method: 'GET',
@@ -102,6 +109,14 @@ function getAllMainList($scope, $http) {
             $scope.albuns = [];
             $.each(albuns_temp, function (key, val) {
                 $scope.albuns.push(val);
+            });
+        };
+
+        $scope.get_all_menus = function () {
+            var menus_temp = $scope.menus_backup;
+            $scope.menus = [];
+            $.each(menus_temp, function (key, val) {
+                $scope.menus.push(val);
             });
         };
 
