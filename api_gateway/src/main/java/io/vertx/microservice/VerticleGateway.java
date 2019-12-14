@@ -57,6 +57,8 @@ public class VerticleGateway extends AbstractVerticle {
         router.get("/api/getProducts").handler(this::getProducts);
         router.get("/api/getTables").handler(this::getTables);
 		router.get("/api/getMenus").handler(this::getMenus);
+		router.get("/api/reporting").handler(this::getAllReportingData);
+		
 		
         //get session user DATA
         router.get("/api/getSessionUser").handler(this::getSessionUserData);
@@ -90,6 +92,11 @@ public class VerticleGateway extends AbstractVerticle {
      * @param router router instance
      */
 
+    private void getAllReportingData(RoutingContext ctx) {
+        vertx.eventBus().send("/api/reporting", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+    }
+	
+	
     protected void enableLocalSession(Router router) {
         router.route().handler(CookieHandler.create());
         router.route().handler(BodyHandler.create());

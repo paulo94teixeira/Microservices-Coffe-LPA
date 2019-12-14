@@ -24,3 +24,7 @@ cd ..
 cd get_menus
 java -jar target/get_menus-1.0-fat.jar start -id get_menus -cluster -conf src/main/config/config.json --redirect-output
 cd ..
+
+cd reporting
+java -jar target/reporting-1.0-fat.jar start -id reporting -cluster -conf src/main/config/config.json --redirect-output
+cd ..

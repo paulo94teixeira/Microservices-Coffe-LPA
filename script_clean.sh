@@ -23,3 +23,7 @@ cd ..
 cd get_menus
 java -jar target/get_menus-1.0-fat.jar stop get_menus
 cd ..
+
+cd reporting
+java -jar target/reporting-1.0-fat.jar stop reporting
+cd ..

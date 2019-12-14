@@ -16,8 +16,7 @@
 	<module>get_products</module>
 	<module>get_tables</module>
 	<module>get_menus</module>
-    <module>get_products</module>
-    <module>get_tables</module>
+	<module>reporting</module>
   </modules>
 
   <properties>
