@@ -16,6 +16,8 @@
 	<module>get_products</module>
 	<module>get_tables</module>
 	<module>get_menus</module>
+    <module>get_products</module>
+    <module>get_tables</module>
   </modules>
 
   <properties>
