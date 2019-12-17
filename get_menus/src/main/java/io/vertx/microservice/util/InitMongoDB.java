@@ -3,7 +3,6 @@ package io.vertx.microservice.util;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
-import io.vertx.microservice.util.Menus;
 import java.util.ArrayList;
 
 public class InitMongoDB {

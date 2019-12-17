@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class Menus {
     protected int id;
     protected String descri;
-    protected int preco;
+    protected int price;
 
-    public Menus(int id, String descri, int preco) {
+    public Menus(int id, String descri, int price) {
         this.id = id;
         this.descri = descri;
-        this.preco = preco;
+        this.price = price;
     }
 	
     public Menus() {
@@ -24,9 +24,9 @@ public class Menus {
     
     public ArrayList<Menus> Fill_menus(){
         ArrayList<Menus> menus = new ArrayList<>();
-        menus.add(new Menus(1, "Coffee + Cake",2));
-        menus.add(new Menus(2, "Mixed + Juice",3));
-        menus.add(new Menus(3, "Pizza + Juice",5));
+        menus.add(new Menus(1, "Coffee + Cake", 2));
+        menus.add(new Menus(2, "Mixed + Juice", 3));
+        menus.add(new Menus(3, "Pizza + Juice", 5));
         return menus;
     }
     
@@ -34,7 +34,7 @@ public class Menus {
     JsonObject json = new JsonObject()
         .put("id", this.id)
         .put("descri", this.descri)
-		.put("preco", this.preco);
+		.put("price", this.price);
     return json;
     }
     

@@ -20,10 +20,8 @@ vertxApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '/assets/view/registo.html'
         }).when('/login', {
             templateUrl: '/assets/view/login.html'
-        }).when('/404', {
-            templateUrl: '/assets/view/404.html'
         }).otherwise({
-            redirectTo: '/404'
+            templateUrl: '/assets/view/login.html'
         });
     }]);
 
@@ -69,29 +67,38 @@ function getAllMainList($scope, $http) {
             $scope.tables = data;
             $scope.tables_backup = data;
         });		
+		
+		$scope.get_all_tables = function (table) {
+            $http({
+                method: 'GET',
+                url: '/api/getTables/' + table.id
+            }).success(data => {
+                if (data.length > 0) {
+                    $scope.tables = data;
+                    $scope.index_of_table = 0;
+					$tableTemp = table.id;
+                }else{
+                    $scope.tables = data;
+                }
+            }).error((data, status, headers, config) => {
+            });
+        };
+		
+		/**$scope.get_all_tables = function () {
+            var tables_temp = $scope.tables_backup;
+            $scope.tables = [];
+            $.each(tables_temp, function (key, val) {
+                $scope.tables.push(val);
+            });
+        };**/
+		
+		
+
 
         $http.get('/api/getMenus').success(function (data) {
             $scope.menus = data;
             $scope.menus_backup = data;
         });		
-		
-        $scope.get_album_musics = function (album) {
-            $http({
-                method: 'GET',
-                url: '/api/getAlbum/' + album.id
-            }).success(data => {
-                if (data.length > 0) {
-                    $scope.album_music = data;
-                    $scope.index_of_music = 0;
-
-                    handler_music_player("start");
-                }else{
-                    $scope.album_music = data;
-                    handler_music_player("no_sound");
-                }
-            }).error((data, status, headers, config) => {
-            });
-        };
 
         $scope.get_all_products = function (product_id) {
             var albuns_temp = $scope.albuns_backup;
@@ -118,68 +125,6 @@ function getAllMainList($scope, $http) {
             $.each(menus_temp, function (key, val) {
                 $scope.menus.push(val);
             });
-        };
-
-        $scope.get_all_tables = function () {
-            var tables_temp = $scope.tables_backup;
-            $scope.tables = [];
-            $.each(tables_temp, function (key, val) {
-                $scope.tables.push(val);
-            });
-        };
-
-        $scope.procurar_all = function (word_search) {
-            var albuns_temp = $scope.albuns_backup;
-            $scope.albuns = [];
-            $.each(albuns_temp, function (key, val) {
-                if( val.title.toLowerCase().includes(word_search.toLowerCase())){
-                    $scope.albuns.push(val);
-                }
-            });
-        };
-
-        $scope.handler_musics = function (handler_music) {
-            handler_music_player(handler_music);
-
-        };
-
-        var handler_music_player = function (handler) {
-            var musics = $scope.album_music;
-            var index = $scope.index_of_music;
-            if (musics.length > 0) {
-                if (handler == "start") {
-                    index = 0;
-                } else if (handler == "previous") {
-                    if (index > 0) {
-                        index = index - 1;
-                    } else {
-                        index = musics.length - 1;
-                    }
-                } else if (handler == "next") {
-                    if (index + 1 < musics.length) {
-                        index = index + 1;
-                    } else {
-                        index = 0;
-                    }
-                }else if (handler == "no_sound"){
-                    $scope.album_music = [];
-                    $scope.index_of_music = 0;
-                    document.getElementById('mysong').src = "";
-                    $('#img_music').attr('src', "assets/img/default.jpg");
-                    $('#track-desc').html('There are no tracks loaded in the player.');
-                }
-                // Show the artist and title.
-                $scope.index_of_music = index;
-                document.getElementById('mysong').src = musics[index].source;
-                $('#track-desc').html('<b>' + musics[index].id + '  ' + musics[index].title + '</b>');
-                $('#img_music').attr('src', "assets/" + musics[index].image);
-            } else {
-                $scope.album_music = [];
-                $scope.index_of_music = 0;
-                document.getElementById('mysong').src = "";
-                $('#img_music').attr('src', "assets/img/default.jpg");
-                $('#track-desc').html('There are no tracks loaded in the player.');
-            }
         };
     };
 }

@@ -43,11 +43,11 @@ public class MainVerticle extends AbstractVerticle {
         vertx.eventBus().consumer("/api/reporting", getAllReports());
 
 
-        logger.info("Reporting service iniciado, à espera de comunicacoes");
+        logger.info("Reporting service iniciated, waiting for communications");
     }
 
     private <T> void getEventAndSaveInDb(Message<T> consumerEvent) {
-        logger.info("Endereço da mensagem enviada por eventBus para o endereço-##>" + consumerEvent.address() + " com o seguinte conteudo --->> " + consumerEvent.body().toString());
+        logger.info("Address of the message sent by eventBus to the address ->" + consumerEvent.address() + " with this content -> " + consumerEvent.body().toString());
 
         mongo.save(COLLECTION, new JsonObject()
             .put("mensagemEventBus",consumerEvent.body().toString())

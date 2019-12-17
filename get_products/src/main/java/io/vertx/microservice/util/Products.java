@@ -10,10 +10,17 @@ import java.util.ArrayList;
 public class Products {
     protected int id;
     protected String product;
-
+	protected int price;
+	
     public Products(int id, String product) {
         this.id = id;
         this.product = product;
+    }
+	
+    public Products(int id, String product, int price) {
+        this.id = id;
+        this.product = product;
+		this.price = price;
     }
 
     public Products() {
@@ -32,8 +39,8 @@ public class Products {
         products.add(new Products(6, "Water"));
         products.add(new Products(7, "Cappuccino"));
         products.add(new Products(8, "Toast"));
-        products.add(new Products(9, "Croassaint"));
-        products.add(new Products(10, "Coca-Cola"));		
+        products.add(new Products(9, "Croassaint", 2));
+        products.add(new Products(10, "Coca-Cola", 1));		
         return products;
     }
     

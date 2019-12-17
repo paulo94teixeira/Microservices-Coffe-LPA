@@ -9,7 +9,6 @@ import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
@@ -18,14 +17,10 @@ import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
-import io.vertx.microservice.util.InitMongoDB;
 import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.ServiceDiscoveryOptions;
 import io.vertx.servicediscovery.types.HttpEndpoint;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Set;
 
 public class VerticleGateway extends AbstractVerticle {
@@ -66,8 +61,8 @@ public class VerticleGateway extends AbstractVerticle {
         // get HTTP host and port from configuration, or use default value
         int port = config().getInteger("api.gateway.http.port", DEFAULT_PORT);
         String host = config().getString("api.gateway.http.address", DEFAULT_HOST);
-        logger.info("################ " + port);
-        logger.info("################ " + host);
+        logger.info("Port: " + port);
+        logger.info("Host " + host);
         vertx.createHttpServer()
                 .requestHandler(router::accept)
                 .listen(port, host, ar -> {
@@ -92,7 +87,21 @@ public class VerticleGateway extends AbstractVerticle {
     private void getAllReportingData(RoutingContext ctx) {
         vertx.eventBus().send("/api/reporting", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
+    
+    private void getProducts(RoutingContext ctx) {
+        logger.info("Get all products ");
+        vertx.eventBus().send("/api/getProducts-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+    }
 
+    private void getTables(RoutingContext ctx) {
+        logger.info("Get all tables ");
+        vertx.eventBus().send("/api/getTables-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+    }
+
+    private void getMenus(RoutingContext ctx) {
+        logger.info("Get all menus ");
+        vertx.eventBus().send("/api/getMenus-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+    }
     protected void enableLocalSession(Router router) {
         router.route().handler(CookieHandler.create());
         router.route().handler(BodyHandler.create());
@@ -104,9 +113,27 @@ public class VerticleGateway extends AbstractVerticle {
         context.session().destroy();
         context.response().setStatusCode(204).end();
     }
+   
+    private void novoRegistoUser(RoutingContext ctx) {
+        logger.info("New Register--- ");
+        JsonObject newUser = ctx.getBodyAsJson();
+        vertx.eventBus().send("/api/registo-post", newUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+    }
+    
+        private void efetuarLogin(RoutingContext ctx) {
+        logger.info("Login ---");
+        JsonObject loginUser = ctx.getBodyAsJson();
+        if (loginUser == null) {
+            // bad request
+            ctx.fail(400);
+            return;
+        }
 
+        vertx.eventBus().send("/api/login-post", loginUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> login_user_handler(ctx, responseHandler));
+    }
+    
     private void getSessionUserData(RoutingContext ctx) {
-        logger.info("GET SESSION USER ");
+        logger.info("GET Session User ");
         Session session = ctx.session();
         String id = session.get("id");
         String username = session.get("username");
@@ -122,42 +149,9 @@ public class VerticleGateway extends AbstractVerticle {
         } else {
             message.put("status", "200");
         }
-        logger.info("Responde dados cliente ----" + message);
+        logger.info("Client Response ----" + message);
         ctx.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         ctx.response().end(message.encode());
-    }
-
-    private void novoRegistoUser(RoutingContext ctx) {
-        logger.info("Efetuar novo registo ");
-        JsonObject newUser = ctx.getBodyAsJson();
-        vertx.eventBus().send("/api/registo-post", newUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
-    }
-
-    private void efetuarLogin(RoutingContext ctx) {
-        logger.info("Efetuar login api");
-        JsonObject loginUser = ctx.getBodyAsJson();
-        if (loginUser == null) {
-            // bad request
-            ctx.fail(400);
-            return;
-        }
-
-        vertx.eventBus().send("/api/login-post", loginUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> login_user_handler(ctx, responseHandler));
-    }
-
-    private void getProducts(RoutingContext ctx) {
-        logger.info("Get all products ");
-        vertx.eventBus().send("/api/getProducts-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
-    }
-
-    private void getTables(RoutingContext ctx) {
-        logger.info("Get all tables ");
-        vertx.eventBus().send("/api/getTables-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
-    }
-
-    private void getMenus(RoutingContext ctx) {
-        logger.info("Get all menus ");
-        vertx.eventBus().send("/api/getMenus-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
 
     private void login_user_handler(RoutingContext ctx, AsyncResult<Message<String>> responseHandler) {
@@ -180,36 +174,21 @@ public class VerticleGateway extends AbstractVerticle {
                 session.put("username", user_data_json.getString("username"));
                 session.put("type", user_data_json.getString("type"));
             }
-            logger.info("Respondeu cliente ----" + user);
+            logger.info("Client Response ----" + user);
             ctx.response()
                     .putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                     .end(result.body());
 
         }
     }
-
-    private void getUserData(RoutingContext ctx) {
-        logger.info("procura dados utilizador");
-        Session session = ctx.session();
-        String id = session.get("id");
-        String id_user;
-        if (id.isEmpty()) {
-            id_user = ctx.request().getParam("id");
-        } else {
-            id_user = id;
-        }
-        logger.info("procura dados utilizador" + id_user);
-        vertx.eventBus().send("/api/getUserData-get/:id", id_user, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
-    }
-
     //default msm
     private void defaultResponse(RoutingContext ctx, AsyncResult<Message<String>> responseHandler) {
-        logger.info("Respondeu cliente ");
+        logger.info("Client Response ");
         if (responseHandler.failed()) {
             ctx.fail(500);
         } else {
             final Message<String> result = responseHandler.result();
-            logger.info("Respondeu cliente ----" + result.body());
+            logger.info("Client Response ----" + result.body());
             ctx.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json");
             ctx.response().end(result.body());
         }
@@ -218,6 +197,7 @@ public class VerticleGateway extends AbstractVerticle {
     /*
     *  Fim Métodos para a API Gateway
      */
+    
     /**
      * metodo para publicar MENSAGEM no eventbus, quando é iniciado a APIGateway
      *
@@ -288,23 +268,5 @@ public class VerticleGateway extends AbstractVerticle {
         });
 
         return future;
-    }
-
-    /*
-    *FILL DATABASE
-     */
-    private void insert_to_db(String COLLECTION, JsonObject toJson, MongoClient mongo) {
-
-        mongo.insert(COLLECTION, toJson, ar -> {
-            if (ar.failed()) {
-                logger.warn("fail ao inserir");
-            }
-        });
-    }
-
-    private String getTodayDateAndTime() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        return dateFormat.format(date);
     }
 }
