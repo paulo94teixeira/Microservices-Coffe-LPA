@@ -9,9 +9,9 @@ var vertxApp = angular.module('CrudApp', [
  */
 vertxApp.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-        when('/', {
-            templateUrl: '/assets/view/initial_page.html'
-        }).when('/main', {
+                when('/', {
+                    templateUrl: '/assets/view/initial_page.html'
+                }).when('/main', {
             templateUrl: '/assets/view/main.html',
             controller: getAllMainList
         }).when('/account/:id', {
@@ -27,15 +27,14 @@ vertxApp.config(['$routeProvider', function ($routeProvider) {
 
 
 function getAllMainList($scope, $http) {
-     $scope.album_music = [];
-     $scope.products = [];
-     $scope.albuns = [];
+    $scope.products = [];
+    $scope.albuns = [];
 
-     $http({
+    $http({
         method: 'GET',
         url: '/api/getSessionUser'
     }).success(data => {
-        if (data.status == "200") {
+        if (data.status === "200") {
             fetchPageOnSucessLogin();
         } else {
             window.location.href = '#/';
@@ -45,30 +44,23 @@ function getAllMainList($scope, $http) {
     });
 
     var fetchPageOnSucessLogin = function () {
-        $scope.album_music = [];
-        $scope.albuns = [];
         $scope.products = [];
-        $scope.albuns_backup = [];
-		$scope.tables = [];
-		$scope.tables_backup = [];
-		$scope.menus = [];
-		$scope.menus_backup = [];
+        $scope.products_backup = [];
+        $scope.tables = [];
+        $scope.tables_backup = [];
+        $scope.menus = [];
+        $scope.menus_backup = [];
 
         $http.get('/api/getProducts').success(function (data) {
             $scope.products = data;
         });
 
-        $http.get('/api/getAlbuns').success(function (data) {
-            $scope.albuns = data;
-            $scope.albuns_backup = data;
-        });
-		
         $http.get('/api/getTables').success(function (data) {
             $scope.tables = data;
             $scope.tables_backup = data;
-        });		
-		
-		$scope.get_all_tables = function (table) {
+        });
+
+        $scope.get_all_tables = function (table) {
             $http({
                 method: 'GET',
                 url: '/api/getTables/' + table.id
@@ -76,58 +68,61 @@ function getAllMainList($scope, $http) {
                 if (data.length > 0) {
                     $scope.tables = data;
                     $scope.index_of_table = 0;
-					$tableTemp = table.id;
-                }else{
+                    $tableTemp = table.id;
+                } else {
                     $scope.tables = data;
                 }
             }).error((data, status, headers, config) => {
             });
         };
-		
-		/**$scope.get_all_tables = function () {
-            var tables_temp = $scope.tables_backup;
-            $scope.tables = [];
-            $.each(tables_temp, function (key, val) {
-                $scope.tables.push(val);
-            });
-        };**/
-		
-		
-
 
         $http.get('/api/getMenus').success(function (data) {
             $scope.menus = data;
             $scope.menus_backup = data;
-        });		
+        });
 
         $scope.get_all_products = function (product_id) {
-            var albuns_temp = $scope.albuns_backup;
-            $scope.albuns = [];
- 
-            $.each(albuns_temp, function (key, val) {
-                if( val.product == product_id){
-                    $scope.albuns.push(val);
-                }
+            var products_temp = $scope.products;
+            $scope.products = [];
+            $.each(products_temp, function (key, val) {
+                $scope.products.push(val);
             });
         };
 
-        $scope.get_all_albuns = function () {
-            var albuns_temp = $scope.albuns_backup;
-            $scope.albuns = [];
-            $.each(albuns_temp, function (key, val) {
-                $scope.albuns.push(val);
+        $scope.add_product = function (product) {
+            var table = prompt("Please enter the number of table", "1");
+            $http.post('/api/updateTables', product, table).success(function (data) {
+                handlerMensagensToUser(data, "");
+                $scope.reset();
             });
         };
 
-        $scope.get_all_menus = function () {
-            var menus_temp = $scope.menus_backup;
-            $scope.menus = [];
-            $.each(menus_temp, function (key, val) {
-                $scope.menus.push(val);
-            });
+        $scope.fillSideBar = function (table) {
+            document.getElementById("texSide").innerHTML = table.products + "              Final Price:" + table.total;
         };
     };
 }
+//
+//vertxApp.controller('add_product', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+//
+//        var person = prompt("Please enter your name", "Harry Potter");
+////        $scope.master = {};
+////        $scope.activePath = null;
+////        validateUserHaveSession($http);
+////        $scope.add_product = function (id) {
+////
+////            $http.post('/api/getProducts', id).success(function (data) {
+////                handlerMensagensToUser(data, "");
+////                $scope.reset();
+////            });
+////
+////            $scope.reset = function () {
+////                $scope.user = angular.copy($scope.master);
+////            };
+////
+////        };
+//    }]);
+
 //guarda os dados de user para utilizar em todos os controllers
 vertxApp.service('SessionService', function ($window) {
     var service = this;
@@ -191,7 +186,7 @@ vertxApp.controller('RegistoCtrl', ['$scope', '$http', '$location', function ($s
 
 vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location', '$routeParams',
     function ($scope, $http, $rootScope, $location, $routeParams) {
-        
+
         var id = $routeParams.id;
         $scope.activePath = null;
         $scope.user = {};
@@ -213,31 +208,6 @@ vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location'
             });
         };
 
-        var getPacotesUser = function () {
-            $http({
-                method: 'GET',
-                url: '/api/getPacotes'
-            }).success(data => {
-                $.each(data, function (key, val) {
-                    var a = val.tipo_pacote;
-                    $("<tr>" +
-                            "<td>" +
-                            "<button onclick='subscreverPacote("  +JSON.stringify(a)+ ")' type='button' class='btn btn-primary btn-lg' id='selectedStreamToPlay' " +
-                            "><span class='fas fa-money-bill'></span>" +
-                            "</button>" +
-                            "&nbsp;" +
-                            "</td>" +
-                            "<td>" + val.tipo_pacote + "</td>" +
-                            "<td>" + val.preco +" "+ val.moeda + "</td>" +
-                            "<td>" + val.descricao + "</td>" +
-                            "</tr>"
-                            ).appendTo("#contentCollection");
-                });
-
-            }).error((data, status, headers, config) => {
-            });
-        };
-
         $http({
             method: 'GET',
             url: '/api/getSessionUser'
@@ -251,9 +221,9 @@ vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location'
             }
         }).error(() => {
         });
-        
-        
-        
+
+
+
     }]);
 
 vertxApp.controller('HeaderCtrl', ['$scope', '$http', '$rootScope', '$location',
@@ -267,7 +237,7 @@ vertxApp.controller('HeaderCtrl', ['$scope', '$http', '$rootScope', '$location',
             if (data.status == "200") {
                 $scope.user = data;
             } else {
-                $scope.user ={};
+                $scope.user = {};
             }
         }).error(() => {
         });

@@ -1,8 +1,8 @@
 <div class="set_backgroud_full_screen_img">
     <div id="sidebar-wrapper">       
         <div id="categorias_format" >Products</div>    
-        <div ng-repeat="product in products">
-            <a ng-click="get_all_products(product.id)" class="list-group-item list-group-item-action bg-light">{{product.product}}</a>
+        <div ng-repeat="product in products" ng-click="get_all_products(product.id)">
+            <a ng-click="add_product(product)" class="list-group-item list-group-item-action bg-light">{{product.product}}</a>
         </div>
         <div id="categorias_format" >Menus</div>  
         <div ng-repeat="menu in menus">
@@ -12,13 +12,13 @@
     <div>
         <div align="left" id="sidebar-mesa">
             <form id="paper" method="get" action="">	
-                <textarea rows='40' placeholder='Products by table'></textarea>
+                <textarea rows='40'id="texSide" placeholder='Products by table'></textarea>
                 <input id="buttonMesa" type="submit" value="Pay build">
             </form>
         </div>
         <div id="wrapper">    
-            <div ng-repeat="table in tables">
-                <h1><a ng-click="get_all_tables(table)" class="example-1"><b>{{table.id}}</b></a></h1>
+            <div ng-repeat="table in tables" ng-click="get_all_tables(table)">
+                <h1><a ng-click="fillSideBar(table)"  class="example-1"><b>{{table.id}}</b></a></h1>
             </div>
         </div>
     </div>
