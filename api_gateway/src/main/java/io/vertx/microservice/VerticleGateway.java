@@ -52,6 +52,7 @@ public class VerticleGateway extends AbstractVerticle {
         router.get("/api/getTables").handler(this::getTables);
         router.get("/api/getMenus").handler(this::getMenus);
         router.get("/api/reporting").handler(this::getAllReportingData);
+        router.get("/api/updateTable/:id").handler(this::updateTable);
 
         //get session user DATA
         router.get("/api/getSessionUser").handler(this::getSessionUserData);
@@ -87,7 +88,7 @@ public class VerticleGateway extends AbstractVerticle {
     private void getAllReportingData(RoutingContext ctx) {
         vertx.eventBus().send("/api/reporting", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
-    
+
     private void getProducts(RoutingContext ctx) {
         logger.info("Get all products ");
         vertx.eventBus().send("/api/getProducts-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
@@ -102,6 +103,7 @@ public class VerticleGateway extends AbstractVerticle {
         logger.info("Get all menus ");
         vertx.eventBus().send("/api/getMenus-get", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
+
     protected void enableLocalSession(Router router) {
         router.route().handler(CookieHandler.create());
         router.route().handler(BodyHandler.create());
@@ -113,14 +115,14 @@ public class VerticleGateway extends AbstractVerticle {
         context.session().destroy();
         context.response().setStatusCode(204).end();
     }
-   
+
     private void novoRegistoUser(RoutingContext ctx) {
         logger.info("New Register--- ");
         JsonObject newUser = ctx.getBodyAsJson();
         vertx.eventBus().send("/api/registo-post", newUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
-    
-        private void efetuarLogin(RoutingContext ctx) {
+
+    private void efetuarLogin(RoutingContext ctx) {
         logger.info("Login ---");
         JsonObject loginUser = ctx.getBodyAsJson();
         if (loginUser == null) {
@@ -128,10 +130,20 @@ public class VerticleGateway extends AbstractVerticle {
             ctx.fail(400);
             return;
         }
-
         vertx.eventBus().send("/api/login-post", loginUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> login_user_handler(ctx, responseHandler));
     }
-    
+
+    private void updateTable(RoutingContext ctx) {
+        logger.info("Fimd data table");
+        Session session = ctx.session();
+        String id_table = session.get("id");
+        JsonObject message = new JsonObject();
+        message.put("id", id_table);
+
+        logger.info("Update table" + id_table);
+        vertx.eventBus().send("/api/updateTable/:id-get", message, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+    }
+
     private void getSessionUserData(RoutingContext ctx) {
         logger.info("GET Session User ");
         Session session = ctx.session();
@@ -181,6 +193,7 @@ public class VerticleGateway extends AbstractVerticle {
 
         }
     }
+
     //default msm
     private void defaultResponse(RoutingContext ctx, AsyncResult<Message<String>> responseHandler) {
         logger.info("Client Response ");
@@ -197,7 +210,6 @@ public class VerticleGateway extends AbstractVerticle {
     /*
     *  Fim Métodos para a API Gateway
      */
-    
     /**
      * metodo para publicar MENSAGEM no eventbus, quando é iniciado a APIGateway
      *
