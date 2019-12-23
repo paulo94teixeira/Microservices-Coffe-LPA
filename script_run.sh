@@ -28,3 +28,7 @@ cd ..
 cd reporting
 java -jar target/reporting-1.0-fat.jar start -id reporting -cluster -conf src/main/config/config.json --redirect-output
 cd ..
+
+cd update_table
+java -jar target/update_table-1.0-fat.jar start -id update_table -cluster -conf src/main/config/config.json --redirect-output
+cd ..

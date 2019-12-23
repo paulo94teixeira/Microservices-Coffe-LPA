@@ -27,3 +27,7 @@ cd ..
 cd reporting
 java -jar target/reporting-1.0-fat.jar stop reporting
 cd ..
+
+cd update_table
+java -jar target/update_table-1.0-fat.jar stop update_table
+cd ..
