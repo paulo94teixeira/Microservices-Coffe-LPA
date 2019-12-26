@@ -30,7 +30,7 @@ public class MainVerticle extends AbstractVerticle {
 
         this.eventBus = vertx.eventBus();
 
-        this.eventBus.consumer("/api/updatePacote/:id-get", updatePacote());
+        this.eventBus.consumer("/api/update_table/:id-get:product", updateTable());
 
         this.eventBus.consumer(EVENT_ADRESS, this::getEventAndSaveInDb);
 
@@ -58,33 +58,35 @@ public class MainVerticle extends AbstractVerticle {
     }
 
 
-    private Handler<Message<JsonObject>> updatePacote() {
+    private Handler<Message<JsonObject>> updateTable() {
 
-            return handler -> {
-            final JsonObject body = handler.body();
-            mongo.findOne(COLLECTION, new JsonObject().put("id", body.getString("id")), null, lookup -> {
-                // error handling
-                if (lookup.failed()) {
-                    handler.fail(500, "lookup failed");
-                    return;
-                }
+        var person = prompt("Enter into the function updateTable ", "Olá");
 
-                JsonObject user = lookup.result();
-
-                if (user == null) {
-                    // does not exist
-                    handler.fail(404, "user does not exists");
-                } else {
-
-                    // update the user properties
-                    user.put("tipo_utilizador", body.getString("pacote"));
-
-                    //publica no eventbus
-                    publishOnEventBus(user);
-                    handler.reply(user.encode());
-                }
-            });
-        };
+//            return handler -> {
+//            final JsonObject body = handler.body();
+//            mongo.findOne(COLLECTION, new JsonObject().put("id", body.getString("id")), null, lookup -> {
+//                // error handling
+//                if (lookup.failed()) {
+//                    handler.fail(500, "lookup failed");
+//                    return;
+//                }
+//
+//                JsonObject user = lookup.result();
+//
+//                if (user == null) {
+//                    // does not exist
+//                    handler.fail(404, "user does not exists");
+//                } else {
+//
+//                    // update the user properties
+//                    user.put("tipo_utilizador", body.getString("pacote"));
+//
+//                    //publica no eventbus
+//                    publishOnEventBus(user);
+//                    handler.reply(user.encode());
+//                }
+//            });
+//        };
     }
 
     
