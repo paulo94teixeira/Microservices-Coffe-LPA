@@ -52,7 +52,7 @@ public class VerticleGateway extends AbstractVerticle {
         router.get("/api/getTables").handler(this::getTables);
         router.get("/api/getMenus").handler(this::getMenus);
         router.get("/api/reporting").handler(this::getAllReportingData);
-        router.get("/api/updateTable/:id").handler(this::updateTable);
+        router.get("/api/updateTable").handler(this::updateTable);
 
         //get session user DATA
         router.get("/api/getSessionUser").handler(this::getSessionUserData);
@@ -107,7 +107,7 @@ public class VerticleGateway extends AbstractVerticle {
     protected void enableLocalSession(Router router) {
         router.route().handler(CookieHandler.create());
         router.route().handler(BodyHandler.create());
-        router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx, "musicao.session")));
+        router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx, "coffe.session")));
     }
 
     private void logoutHandler(RoutingContext context) {
@@ -134,14 +134,8 @@ public class VerticleGateway extends AbstractVerticle {
     }
 
     private void updateTable(RoutingContext ctx) {
-        logger.info("Fimd data table");
-        Session session = ctx.session();
-        String id_table = session.get("id");
-        JsonObject message = new JsonObject();
-        message.put("id", id_table);
-
-        logger.info("Update table" + id_table);
-        vertx.eventBus().send("/api/updateTable/:id-get", message, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+        logger.info("Update table");
+        vertx.eventBus().send("/api/updateTable-post", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
 
     private void getSessionUserData(RoutingContext ctx) {

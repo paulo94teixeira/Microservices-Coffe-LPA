@@ -91,8 +91,8 @@ function getAllMainList($scope, $http) {
 
         $scope.add_product = function (product) {
             var table = prompt("Please enter the number of table", "1");
-            $http.post('/api/update_table', table.id, product).success(function (data) {
-                handlerMensagensToUser(data, "");
+            $http.post('/api/update_table').success(function (table, product) {
+                handlerMensagensToUser(product, "");
                 $scope.reset();
             });
         };

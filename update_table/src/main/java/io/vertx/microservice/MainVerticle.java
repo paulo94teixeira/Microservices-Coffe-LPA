@@ -14,8 +14,8 @@ public class MainVerticle extends AbstractVerticle {
 
     private static final Logger logger = LoggerFactory.getLogger(MainVerticle.class);
     public String COLLECTION;
-    public static final String EVENT_ADRESS = "user_created";
-    public static final String EVENT_ADRESS_UPDATE_USER = "user_update";
+    public static final String EVENT_ADRESS = "table";
+    public static final String EVENT_ADRESS_UPDATE_USER = "table_update";
 
     private EventBus eventBus;
 
@@ -30,7 +30,7 @@ public class MainVerticle extends AbstractVerticle {
 
         this.eventBus = vertx.eventBus();
 
-        this.eventBus.consumer("/api/update_table/:id-get:product", updateTable());
+        this.eventBus.consumer("/api/updateTable-post", updateTable());
 
         this.eventBus.consumer(EVENT_ADRESS, this::getEventAndSaveInDb);
 
@@ -59,8 +59,7 @@ public class MainVerticle extends AbstractVerticle {
 
 
     private Handler<Message<JsonObject>> updateTable() {
-
-        var person = prompt("Enter into the function updateTable ", "Olá");
+        logger.info("entrei----- olá mudo");
 
 //            return handler -> {
 //            final JsonObject body = handler.body();
@@ -87,6 +86,7 @@ public class MainVerticle extends AbstractVerticle {
 //                }
 //            });
 //        };
+        return null;
     }
 
     
