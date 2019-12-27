@@ -15,7 +15,7 @@ public class MainVerticle extends AbstractVerticle {
     private static final Logger logger = LoggerFactory.getLogger(MainVerticle.class);
     public String COLLECTION;
     public static final String EVENT_ADRESS = "table";
-    public static final String EVENT_ADRESS_UPDATE_USER = "table_update";
+    public static final String EVENT_ADRESS_UPDATE_TABLE = "table_update";
 
     private EventBus eventBus;
 
@@ -34,7 +34,7 @@ public class MainVerticle extends AbstractVerticle {
 
         this.eventBus.consumer(EVENT_ADRESS, this::getEventAndSaveInDb);
 
-        this.eventBus.consumer(EVENT_ADRESS_UPDATE_USER, this::getEventAndUpdateDb);
+        this.eventBus.consumer(EVENT_ADRESS_UPDATE_TABLE, this::getEventAndUpdateDb);
 
     }
 
@@ -54,7 +54,7 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     public void publishOnEventBus(JsonObject jsonObject){
-        this.eventBus.publish(EVENT_ADRESS_UPDATE_USER, jsonObject.toString());
+        this.eventBus.publish(EVENT_ADRESS_UPDATE_TABLE, jsonObject.toString());
     }
 
 
