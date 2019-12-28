@@ -32,3 +32,7 @@ cd ..
 cd update_table
 java -jar target/update_table-1.0-fat.jar start -id update_table -cluster -conf src/main/config/config.json --redirect-output
 cd ..
+
+cd pay_build
+java -jar target/pay_build-1.0-fat.jar start -id pay_build -cluster -conf src/main/config/config.json --redirect-output
+cd ..

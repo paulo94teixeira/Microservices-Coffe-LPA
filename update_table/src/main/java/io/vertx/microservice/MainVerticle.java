@@ -39,14 +39,14 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     private <T> void getEventAndUpdateDb(Message<T> consumerEvent) {
-        logger.info("Endereço da mensagem enviada por eventBus para o endereço-##>" + consumerEvent.address() + " com o seguinte conteudo --->> " + consumerEvent.body().toString());
+        logger.info("Endereço da mensagem enviada por eventBus para o endereço->" + consumerEvent.address() + " com o seguinte conteudo --->> " + consumerEvent.body().toString());
         JsonObject user_json = new JsonObject(consumerEvent.body().toString());
 
         mongo.replaceDocuments(COLLECTION, new JsonObject().put("_id", user_json.getString("_id")), user_json, AsyncResult::result);
     }
 
     private <T> void getEventAndSaveInDb(Message<T> consumerEvent) {
-        logger.info("Endereço da mensagem enviada por eventBus para o endereço-##>" + consumerEvent.address() + " com o seguinte conteudo --->> " + consumerEvent.body().toString());
+        logger.info("Endereço da mensagem enviada por eventBus para o endereço->" + consumerEvent.address() + " com o seguinte conteudo --->> " + consumerEvent.body().toString());
         JsonObject user_json = new JsonObject(consumerEvent.body().toString());
         JsonObject user_data = new JsonObject(user_json.getJsonObject("json_obj").toString());
 

@@ -14,12 +14,13 @@ vertxApp.config(['$routeProvider', function ($routeProvider) {
                 }).when('/main', {
             templateUrl: '/assets/view/main.html',
             controller: getAllMainList
-        }).when('/account/:id', {
-            templateUrl: '/assets/view/account.html'
         }).when('/registo', {
             templateUrl: '/assets/view/registo.html'
         }).when('/login', {
             templateUrl: '/assets/view/login.html'
+        }).when('/pay', {
+            templateUrl: '/assets/view/pay.html',
+            controller: getAllMainList
         }).otherwise({
             templateUrl: '/assets/view/login.html'
         });
@@ -191,6 +192,25 @@ vertxApp.controller('RegistoCtrl', ['$scope', '$http', '$location', function ($s
 
         };
     }]);
+
+
+vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+        $scope.master = {};
+        $scope.activePath = null;
+        validateUserHaveSession($http);
+        $scope.add_new_pay = function (pay) {
+
+            $http.post('/api/registo', pay).success(function (data) {
+                handlerMensagensToUser(data, "");
+                $scope.reset();
+            });
+
+            $scope.reset = function () {
+                $scope.pay = angular.copy($scope.master);
+            };
+        };
+    }]);
+
 
 
 

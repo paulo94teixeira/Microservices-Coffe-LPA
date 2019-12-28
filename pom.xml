@@ -17,6 +17,7 @@
 	<module>get_tables</module>
 	<module>get_menus</module>
 	<module>update_table</module>
+	<module>pay_build</module>
 	<module>reporting</module>
   </modules>
 

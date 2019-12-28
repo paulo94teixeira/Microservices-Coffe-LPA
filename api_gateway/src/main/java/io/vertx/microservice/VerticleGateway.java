@@ -46,6 +46,7 @@ public class VerticleGateway extends AbstractVerticle {
 
         // define some REST API
         router.post("/api/registo").handler(this::novoRegistoUser);
+        router.post("/api/pay").handler(this::payBuild);
         router.post("/api/login").handler(this::efetuarLogin);
         router.post("/logout").handler(this::logoutHandler);
         router.get("/api/getProducts").handler(this::getProducts);
@@ -120,6 +121,12 @@ public class VerticleGateway extends AbstractVerticle {
         logger.info("New Register--- ");
         JsonObject newUser = ctx.getBodyAsJson();
         vertx.eventBus().send("/api/registo-post", newUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+    }
+
+    private void payBuild(RoutingContext ctx) {
+        logger.info("Pay Build--- ");
+        JsonObject payInfo = ctx.getBodyAsJson();
+        vertx.eventBus().send("/api/pay-post", payInfo, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
 
     private void efetuarLogin(RoutingContext ctx) {

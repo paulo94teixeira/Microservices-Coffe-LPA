@@ -39,7 +39,7 @@ public class MainVerticle extends AbstractVerticle {
                 handler.fail(500, "lookup failed");
                 return;
             }
-            logger.info("Resultado--"+lookup.result());
+            logger.info("Result:"+lookup.result());
             //publica no eventbus
             publishOnEventBus(new JsonArray(lookup.result()));
             handler.reply(new JsonArray(lookup.result()).encode());

@@ -58,6 +58,14 @@
         <processor name="io.vertx.codegen.CodeGenProcessor" />
         <module name="reporting" />
       </profile>
+      <profile name="Annotation profile for pay_build" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\pay_build/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="pay_build" />
+      </profile>
       <profile name="Annotation profile for coffe-LPA" enabled="true">
         <sourceOutputDir name="src/main/generated" />
         <sourceTestOutputDir name="src/test/generated" />
@@ -74,6 +82,7 @@
       <module name="get_products" target="1.8" />
       <module name="get_tables" target="1.8" />
       <module name="login" target="1.8" />
+      <module name="pay_build" target="1.8" />
       <module name="registar_user" target="1.8" />
       <module name="reporting" target="1.8" />
       <module name="update_table" target="1.8" />
