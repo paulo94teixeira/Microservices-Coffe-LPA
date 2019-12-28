@@ -1,5 +1,6 @@
 # Eclipse template
 .metadata
+.idea
 bin/
 tmp/
 *.tmp
