@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Annotation profile for coffe-LPA" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\api_gateway/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="api_gateway" />
+      </profile>
+      <profile name="Annotation profile for registar_user" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\registar_user/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="registar_user" />
+      </profile>
+      <profile name="Annotation profile for login" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\login/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="login" />
+      </profile>
+      <profile name="Annotation profile for get_products" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\get_products/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="get_products" />
+      </profile>
+      <profile name="Annotation profile for get_tables" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\get_tables/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="get_tables" />
+      </profile>
+      <profile name="Annotation profile for get_menus" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\get_menus/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="get_menus" />
+      </profile>
+      <profile name="Annotation profile for update_table" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\update_table/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="update_table" />
+      </profile>
+      <profile name="Annotation profile for reporting" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\reporting/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="reporting" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api_gateway" target="1.8" />
+      <module name="coffe-LPA" target="1.8" />
+      <module name="get_menus" target="1.8" />
+      <module name="get_products" target="1.8" />
+      <module name="get_tables" target="1.8" />
+      <module name="login" target="1.8" />
+      <module name="registar_user" target="1.8" />
+      <module name="reporting" target="1.8" />
+      <module name="update_table" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

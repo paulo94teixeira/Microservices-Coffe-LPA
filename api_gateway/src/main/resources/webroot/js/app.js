@@ -98,7 +98,8 @@ function getAllMainList($scope, $http) {
         };
 
         $scope.fillSideBar = function (table) {
-            document.getElementById("texSide").innerHTML = table.products + "              Final Price:" + table.total;
+            document.getElementById("texSide").value = table.products + '<br>' + 'Final Price:' + table.total;
+            document.getElementById("texSide").value = 'ola';
         };
     };
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api_gateway/api_gateway.iml" filepath="$PROJECT_DIR$/api_gateway/api_gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/coffe-LPA.iml" filepath="$PROJECT_DIR$/coffe-LPA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/get_menus/get_menus.iml" filepath="$PROJECT_DIR$/get_menus/get_menus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/get_products/get_products.iml" filepath="$PROJECT_DIR$/get_products/get_products.iml" />
+      <module fileurl="file://$PROJECT_DIR$/get_tables/get_tables.iml" filepath="$PROJECT_DIR$/get_tables/get_tables.iml" />
+      <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registar_user/registar_user.iml" filepath="$PROJECT_DIR$/registar_user/registar_user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reporting/reporting.iml" filepath="$PROJECT_DIR$/reporting/reporting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/update_table/update_table.iml" filepath="$PROJECT_DIR$/update_table/update_table.iml" />
+    </modules>
+  </component>
+</project>
