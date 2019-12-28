@@ -1,0 +1,27 @@
+<div class="set_backgroud_full_screen_img">
+    <div class="container_center_div theme-showcase" role="main" ng-controller="RegistoCtrl">
+        <div align="center" class="jumbotron">
+            <h2 style="color: white">Pay</h2>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label style="color: white" >Table</label>
+                    <input class="form-control" type="text" ng-model="pay.table" required />
+                </div>
+                <div class="form-group">
+                    <label style="color: white">Name of client:</label>
+                    <input class="form-control" type="name" ng-model="pay.name" required />
+                </div>
+                <div class="form-group">
+                    <label style="color: white" >NIF:</label>
+                    <input class="form-control" type="NIF" ng-model="pay.NIF" required />
+                </div>
+                <div class="form-group">
+                    <label style="color: white" >Total:</label>
+                    <input class="form-control" type="totalPay" ng-model="pay.totalPay" required />
+                </div>
+                <button class="btn btn-primary" id="add-new-btn" ng-click="add_new_pay(pay)">Pay build!</button>
+                <a href="#/main" style="color: white" class="btn">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

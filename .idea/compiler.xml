@@ -2,14 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for coffe-LPA" enabled="true">
-        <sourceOutputDir name="src/main/generated" />
-        <sourceTestOutputDir name="src/test/generated" />
-        <outputRelativeToContentRoot value="true" />
-        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\api_gateway/src/main" />
-        <processor name="io.vertx.codegen.CodeGenProcessor" />
-        <module name="api_gateway" />
-      </profile>
       <profile name="Annotation profile for registar_user" enabled="true">
         <sourceOutputDir name="src/main/generated" />
         <sourceTestOutputDir name="src/test/generated" />
@@ -65,6 +57,14 @@
         <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\reporting/src/main" />
         <processor name="io.vertx.codegen.CodeGenProcessor" />
         <module name="reporting" />
+      </profile>
+      <profile name="Annotation profile for coffe-LPA" enabled="true">
+        <sourceOutputDir name="src/main/generated" />
+        <sourceTestOutputDir name="src/test/generated" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="codegen.output" value="C:\Users\Paulo Teixeira\Documents\GitHub\Microservices-Coffe-LPA\api_gateway/src/main" />
+        <processor name="io.vertx.codegen.CodeGenProcessor" />
+        <module name="api_gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

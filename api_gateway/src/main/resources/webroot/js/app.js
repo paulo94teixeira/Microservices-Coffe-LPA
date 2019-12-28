@@ -98,8 +98,17 @@ function getAllMainList($scope, $http) {
         };
 
         $scope.fillSideBar = function (table) {
-            document.getElementById("texSide").value = table.products + '<br>' + 'Final Price:' + table.total;
-            document.getElementById("texSide").value = 'ola';
+            document.getElementById("texSide").value = table.products;
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += '\n';
+            document.getElementById("texSide").value += 'Final Price:' + table.total;
         };
     };
 }
