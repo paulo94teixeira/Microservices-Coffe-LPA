@@ -8,9 +8,6 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.microservice.util.InitMongoDB;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,31 +34,47 @@ public class MainVerticle extends AbstractVerticle {
 
     }
 
-    private <T> void getEventAndUpdateDb(Message<T> consumerEvent) {
-        logger.info("Endereço da mensagem enviada por eventBus para o endereço->" + consumerEvent.address() + " com o seguinte conteudo --->> " + consumerEvent.body().toString());
-        JsonObject user_json = new JsonObject(consumerEvent.body().toString());
-
-        mongo.replaceDocuments(COLLECTION, new JsonObject().put("_id", user_json.getString("_id")), user_json, AsyncResult::result);
-    }
-
     private Handler<Message<JsonObject>> payBuild() {
+        logger.info("Iniciate insert into database the data of build1");
+
         return handler -> {
 
             final JsonObject payInfo = handler.body();
             // error handling
             logger.info("Iniciate insert into database the data of build");
-            mongo.insert(COLLECTION, payInfo, insert -> {
-                // error handling
-                if (insert.failed()) {
-                    handler.fail(500, "lookup failed");
-                    return;
-                }
-                String id = insert.result();
-                payInfo.put("id", id);
-                handlerMensagemFrontend(handler, 200, "Build registered with success", payInfo, "");
-            });
+            JsonObject pay_validation = validatePay(payInfo);
 
+            if (pay_validation.getString("status").equals("0")) {
+                handlerMensagemFrontend(handler, 404, pay_validation.getString("pay_add"), null, "");
+            } else {
+
+                mongo.insert(COLLECTION, payInfo, insert -> {
+                    // error handling
+                    if (insert.failed()) {
+                        handler.fail(500, "lookup failed");
+                        return;
+                    }
+                    String id = insert.result();
+                    payInfo.put("id", id);
+                    handlerMensagemFrontend(handler, 200, "Build registered with success", payInfo, "");
+                });
+            }
         };
+    }
+
+    private JsonObject validatePay(JsonObject payInfo) {
+        String table = payInfo.getString("table");
+        String name = payInfo.getString("name");
+        String NIF = payInfo.getString("NIF");
+        String totalPay = payInfo.getString("totalPay");
+
+        logger.info("Pay info");
+        payInfo.put("table", table);
+        payInfo.put("name", name);
+        payInfo.put("NIF", NIF);
+        payInfo.put("totalPay", totalPay);
+        payInfo.put("created_at", getTodayDateAndTime());
+        return new JsonObject().put("status", "1").put("pay_add", payInfo.encode());
     }
 
     private void handlerMensagemFrontend(Message<JsonObject> handler, int status_code, String mensagem_handler, JsonObject user, String id_Code) {
@@ -79,31 +92,6 @@ public class MainVerticle extends AbstractVerticle {
 
     public void publishOnEventBus(JsonObject jsonObject) {
         this.eventBus.publish(EVENT_ADRESS, jsonObject.toString());
-    }
-
-    private static String encodePasswordWithMd5(String input) {
-        try {
-
-            // Static getInstance method is called with hashing MD5 
-            MessageDigest md = MessageDigest.getInstance("MD5");
-
-            // digest() method is called to calculate message digest 
-            //  of an input digest() return array of byte 
-            byte[] messageDigest = md.digest(input.getBytes());
-
-            // Convert byte array into signum representation 
-            BigInteger no = new BigInteger(1, messageDigest);
-
-            // Convert message digest into hex value 
-            String hashtext = no.toString(16);
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
-            }
-            return hashtext;
-        } // For specifying wrong message digest algorithms 
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private String getTodayDateAndTime() {

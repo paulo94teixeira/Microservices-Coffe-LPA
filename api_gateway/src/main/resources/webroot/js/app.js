@@ -195,13 +195,14 @@ vertxApp.controller('RegistoCtrl', ['$scope', '$http', '$location', function ($s
 
 
 vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+
         $scope.master = {};
         $scope.activePath = null;
-        validateUserHaveSession($http);
-        $scope.add_new_pay = function (pay) {
+        $scope.add_new_pay = function (payBD) {
 
-            $http.post('/api/registo', pay).success(function (data) {
+            $http.post('/api/pay', payBD).success(function (data) {
                 handlerMensagensToUser(data, "");
+                window.location.href = '#/main';
                 $scope.reset();
             });
 
