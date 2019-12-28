@@ -54,6 +54,7 @@ function getAllMainList($scope, $http) {
 
         $http.get('/api/getProducts').success(function (data) {
             $scope.products = data;
+            $scope.products_backup = data;
         });
 
         $http.get('/api/getTables').success(function (data) {
@@ -89,6 +90,17 @@ function getAllMainList($scope, $http) {
                 $scope.products.push(val);
             });
         };
+
+        $scope.procurar_all = function (word_search) {
+            var products_temp = $scope.products_backup;
+            $scope.products = [];
+            $.each(products_temp, function (key, val) {
+                if (val.product.toLowerCase().includes(word_search.toLowerCase())) {
+                    $scope.products.push(val);
+                }
+            });
+        };
+
 
         $scope.add_product = function (product) {
             var table = prompt("Please enter the number of table", "1");

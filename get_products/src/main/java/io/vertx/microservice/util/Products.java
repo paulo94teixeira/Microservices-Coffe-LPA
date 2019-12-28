@@ -37,8 +37,6 @@ public class Products {
         products.add(new Products(6, "Water", 1));
         products.add(new Products(7, "Cappuccino", 2));
         products.add(new Products(8, "Toast", 3));
-        products.add(new Products(9, "Croassaint", 4));
-        products.add(new Products(10, "Coca-Cola", 2));
         return products;
     }
 

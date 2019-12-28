@@ -1,5 +1,10 @@
 <div class="set_backgroud_full_screen_img">
-    <div id="sidebar-wrapper">       
+    <div id="sidebar-wrapper">   
+        <div id="categorias_format" >Find product</div>
+        <form id="search_form_style"  role="form">
+            <input type="text" placeholder="Search" aria-label="Search" ng-model="word_search.search">
+            <button class="btn btn-primary btn-rounded" type="submit" ng-click="procurar_all(word_search.search)">Search</button>
+        </form>
         <div id="categorias_format" >Products</div>    
         <div ng-repeat="product in products" ng-click="get_all_products(product.id)">
             <a ng-click="add_product(product)" class="list-group-item list-group-item-action bg-light">{{product.product}}</a>
