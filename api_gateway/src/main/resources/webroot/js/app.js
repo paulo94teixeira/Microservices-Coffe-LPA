@@ -110,6 +110,7 @@ function getAllMainList($scope, $http) {
             });
         };
 
+
         $scope.fillSideBar = function (table) {
             document.getElementById("texSide").value = table.products;
             document.getElementById("texSide").value += '\n';

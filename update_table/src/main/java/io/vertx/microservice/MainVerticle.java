@@ -14,7 +14,6 @@ public class MainVerticle extends AbstractVerticle {
 
     private static final Logger logger = LoggerFactory.getLogger(MainVerticle.class);
     public String COLLECTION;
-    public static final String EVENT_ADRESS = "table";
     public static final String EVENT_ADRESS_UPDATE_TABLE = "table_update";
 
     private EventBus eventBus;
@@ -30,9 +29,7 @@ public class MainVerticle extends AbstractVerticle {
 
         this.eventBus = vertx.eventBus();
 
-        this.eventBus.consumer("/api/updateTable-post", updateTable());
-
-        this.eventBus.consumer(EVENT_ADRESS, this::getEventAndSaveInDb);
+        this.eventBus.consumer("/api/updateTable", updateTable());
 
         this.eventBus.consumer(EVENT_ADRESS_UPDATE_TABLE, this::getEventAndUpdateDb);
 
@@ -61,32 +58,30 @@ public class MainVerticle extends AbstractVerticle {
     private Handler<Message<JsonObject>> updateTable() {
         logger.info("entrei----- olá mudo");
 
-//            return handler -> {
-//            final JsonObject body = handler.body();
-//            mongo.findOne(COLLECTION, new JsonObject().put("id", body.getString("id")), null, lookup -> {
-//                // error handling
-//                if (lookup.failed()) {
-//                    handler.fail(500, "lookup failed");
-//                    return;
-//                }
-//
-//                JsonObject user = lookup.result();
-//
-//                if (user == null) {
-//                    // does not exist
-//                    handler.fail(404, "user does not exists");
-//                } else {
-//
-//                    // update the user properties
-//                    user.put("tipo_utilizador", body.getString("pacote"));
-//
-//                    //publica no eventbus
-//                    publishOnEventBus(user);
-//                    handler.reply(user.encode());
-//                }
-//            });
-//        };
-        return null;
+            return handler -> {
+            final JsonObject body = handler.body();
+            mongo.findOne(COLLECTION, new JsonObject().put("id", body.getString("id")), null, lookup -> {
+                // error handling
+                if (lookup.failed()) {
+                    handler.fail(500, "lookup failed");
+                    return;
+                }
+
+                JsonObject user = lookup.result();
+
+                if (user == null) {
+                    // does not exist
+                    handler.fail(404, "user does not exists");
+                } else {
+                    // update the user properties
+                    user.put("tipo_utilizador", body.getString("pacote"));
+
+                   //publica no eventbus
+                   publishOnEventBus(user);
+                    handler.reply(user.encode());
+               }
+            });
+        };
     }
 
     
