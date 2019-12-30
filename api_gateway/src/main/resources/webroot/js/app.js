@@ -237,9 +237,11 @@ vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope
                     doc.text('NIF:', 20, 40);
                     doc.text(payBD.NIF, 25, 50);
                     doc.text('Products:', 20, 60);
-                    doc.text(payBD.productsPay, 25, 70);
+                    var uno_ = document.getElementById("productsPay").value;
+                    doc.text(25, 70, uno_);
                     doc.text('Total', 20, 80);
-                    doc.text(payBD.totalPay, 25, 90);
+                    var uno2_ = document.getElementById("totalPay").value;
+                    doc.text(25, 90, uno2_);
                     doc.save('Invoice.pdf');
                 }
             });
