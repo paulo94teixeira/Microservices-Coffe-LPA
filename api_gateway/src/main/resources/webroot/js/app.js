@@ -279,7 +279,7 @@ vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location'
             method: 'GET',
             url: '/api/getSessionUser'
         }).success(data => {
-            if (data.status == "200") {
+            if (data.status === "200") {
                 fetchUser();
                 getPacotesUser();
             } else {

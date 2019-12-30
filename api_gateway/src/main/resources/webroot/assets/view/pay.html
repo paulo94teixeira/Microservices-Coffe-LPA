@@ -6,10 +6,10 @@
             <form class="form-horizontal" >
                 <div class="form-group">
                     <label style="color: white" >Table</label>
-                    <input class="form-control" id="tablePay"/>
+                    <input class="form-control" id="tablePay" disabled/>
 
                     <label style="color: white" >Products buy</label>
-                    <input class="form-control" id="productsPay"/>
+                    <input class="form-control" id="productsPay" disabled/>
 
                     <label style="color: white">Name of client:</label>
                     <input class="form-control" ng-model="payBD.name" required />
@@ -18,7 +18,7 @@
                     <input class="form-control" ng-model="payBD.NIF" required />
 
                     <label style="color: white">Total:</label>
-                    <input class="form-control" id="totalPay"/>
+                    <input class="form-control" id="totalPay" disabled/>
                 </div>
                 <button class="btn btn-primary" id="add-new-btn" ng-click="add_new_pay(payBD)">Pay build!</button>
                 <a href="#/main" style="color: white" class="btn">Cancel</a>
