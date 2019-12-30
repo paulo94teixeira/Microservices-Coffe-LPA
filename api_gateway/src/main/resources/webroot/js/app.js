@@ -1,9 +1,7 @@
 'use strict';
-
 var vertxApp = angular.module('CrudApp', [
     'ngRoute'
 ]);
-
 /**
  * Config routes
  */
@@ -25,12 +23,13 @@ vertxApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '/assets/view/login.html'
         });
     }]);
-
-
+//Global Variables
+var tablenowtotal;
+var tablenowid;
+var tablenowproducts;
 function getAllMainList($scope, $http) {
     $scope.products = [];
     $scope.albuns = [];
-
     $http({
         method: 'GET',
         url: '/api/getSessionUser'
@@ -43,7 +42,6 @@ function getAllMainList($scope, $http) {
         }
     }).error(() => {
     });
-
     var fetchPageOnSucessLogin = function () {
         $scope.products = [];
         $scope.products_backup = [];
@@ -56,12 +54,10 @@ function getAllMainList($scope, $http) {
             $scope.products = data;
             $scope.products_backup = data;
         });
-
         $http.get('/api/getTables').success(function (data) {
             $scope.tables = data;
             $scope.tables_backup = data;
         });
-
         $scope.get_all_tables = function (table) {
             $http({
                 method: 'GET',
@@ -77,7 +73,6 @@ function getAllMainList($scope, $http) {
             }).error((data, status, headers, config) => {
             });
         };
-
         $http.get('/api/getMenus').success(function (data) {
             $scope.menus = data;
             $scope.menus_backup = data;
@@ -101,17 +96,17 @@ function getAllMainList($scope, $http) {
             });
         };
 
-
         $scope.add_product = function (product) {
             var table = prompt("Please enter the number of table", "1");
             $http.post('/api/updateTable').success(function (data) {
                 handlerMensagensToUser(product, "");
-
             });
         };
 
-
         $scope.fillSideBar = function (table) {
+            tablenowtotal = table.total;
+            tablenowid = table.id;
+            tablenowproducts = table.products;
             document.getElementById("texSide").value = table.products;
             document.getElementById("texSide").value += '\n';
             document.getElementById("texSide").value += '\n';
@@ -123,6 +118,11 @@ function getAllMainList($scope, $http) {
             document.getElementById("texSide").value += '\n';
             document.getElementById("texSide").value += '\n';
             document.getElementById("texSide").value += 'Final Price:' + table.total;
+        };
+
+        $scope.deleteAndPassInfo = function () {
+           // var table = prompt();
+
         };
     };
 }
@@ -151,31 +151,24 @@ function getAllMainList($scope, $http) {
 vertxApp.service('SessionService', function ($window) {
     var service = this;
     var sessionStorage = $window.sessionStorage;
-
     service.get = function (key) {
         return sessionStorage.getItem(key);
     };
-
     service.set = function (key, value) {
         sessionStorage.setItem(key, value);
     };
-
     service.unset = function (key) {
         sessionStorage.removeItem(key);
     };
 });
-
-
 vertxApp.controller('LoginCtrl', ['$scope', '$http', '$rootScope', '$location', 'SessionService',
     function ($scope, $http, $rootScope, $location, SessionService) {
 
         validateUserHaveSession($http);
-
         $scope.efetuar_login = function (user) {
 
             $http.post('/api/login', user).success(function (data) {
                 $scope.userData = data;
-
                 if (data.status == "200") {
                     window.location.href = '#/main';
                     window.location.reload();
@@ -186,8 +179,6 @@ vertxApp.controller('LoginCtrl', ['$scope', '$http', '$rootScope', '$location', 
             });
         };
     }]);
-
-
 vertxApp.controller('RegistoCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
         $scope.master = {};
         $scope.activePath = null;
@@ -198,16 +189,22 @@ vertxApp.controller('RegistoCtrl', ['$scope', '$http', '$location', function ($s
                 handlerMensagensToUser(data, "");
                 $scope.reset();
             });
-
             $scope.reset = function () {
                 $scope.user = angular.copy($scope.master);
             };
-
         };
     }]);
 
 
 vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+        //Fill Fields on pay.html
+
+        document.getElementById("tablePay").value = tablenowtotal;
+
+        document.getElementById("totalPay").value = tablenowid;
+
+        document.getElementById("productsPay").value = "tablenowproducts";
+
 
         $scope.master = {};
         $scope.activePath = null;
@@ -218,14 +215,11 @@ vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope
                 window.location.href = '#/main';
                 $scope.reset();
             });
-
             $scope.reset = function () {
                 $scope.pay = angular.copy($scope.master);
             };
         };
     }]);
-
-
 
 
 vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location', '$routeParams',
@@ -234,14 +228,12 @@ vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location'
         var id = $routeParams.id;
         $scope.activePath = null;
         $scope.user = {};
-
         $scope.update = function (user) {
             $http.put('/api/getUserData/' + id, user).success(function (data) {
                 $scope.user = data;
                 $scope.activePath = $location.path('/main');
             });
         };
-
         var fetchUser = function () {
             $http({
                 method: 'GET',
@@ -251,7 +243,6 @@ vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location'
             }).error((data, status, headers, config) => {
             });
         };
-
         $http({
             method: 'GET',
             url: '/api/getSessionUser'
@@ -265,11 +256,7 @@ vertxApp.controller('AccountCtrl', ['$scope', '$http', '$rootScope', '$location'
             }
         }).error(() => {
         });
-
-
-
     }]);
-
 vertxApp.controller('HeaderCtrl', ['$scope', '$http', '$rootScope', '$location',
     function ($scope, $http, $rootScope, $location) {
         $scope.user = {}
@@ -285,7 +272,6 @@ vertxApp.controller('HeaderCtrl', ['$scope', '$http', '$rootScope', '$location',
             }
         }).error(() => {
         });
-
         $scope.logout = function () {
             $http.post('/logout', {}).success(() => {
                 $rootScope.authenticated = false;
@@ -299,9 +285,7 @@ vertxApp.controller('HeaderCtrl', ['$scope', '$http', '$rootScope', '$location',
                 $rootScope.$broadcast('logout', "update");
             });
         };
-
     }]);
-
 function handlerUserSeePages($http, permissao) {
     var data = getUserSessionData($http);
     console.log(data);
