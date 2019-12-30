@@ -1,27 +1,23 @@
 <div class="set_backgroud_full_screen_img">
-    <div class="container_center_div theme-showcase" role="main" ng-controller="PayCtrl">
+    <div class="container_center_div theme-showcase" ng-controller="PayCtrl">
         <div align="center" class="jumbotron">
             <h2 style="color: white">Pay</h2>
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" >
                 <div class="form-group">
                     <label style="color: white" >Table</label>
-                    <input class="form-control" id="tablePay" ng-model="payBD.table" />
-                </div>
-                <div class="form-group">
+                    <input class="form-control" id="tablePay"/>
+
                     <label style="color: white" >Products buy</label>
-                    <input class="form-control" id="productsPay" ng-model="payBD.products" placeholder='adsa' />
-                </div>
-                <div class="form-group">
+                    <input class="form-control" id="productsPay"/>
+
                     <label style="color: white">Name of client:</label>
                     <input class="form-control" ng-model="payBD.name" required />
-                </div>
-                <div class="form-group">
+
                     <label style="color: white" >NIF:</label>
                     <input class="form-control" ng-model="payBD.NIF" required />
-                </div>
-                <div class="form-group">
-                    <label style="color: white" >Total:</label>
-                    <input class="form-control" id="totalPay" ng-model="payBD.totalPay" value="hoenads"/>
+
+                    <label style="color: white">Total:</label>
+                    <input class="form-control" id="totalPay"/>
                 </div>
                 <button class="btn btn-primary" id="add-new-btn" ng-click="add_new_pay(payBD)">Pay build!</button>
                 <a href="#/main" style="color: white" class="btn">Cancel</a>

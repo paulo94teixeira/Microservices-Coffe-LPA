@@ -121,7 +121,7 @@ function getAllMainList($scope, $http) {
         };
 
         $scope.deleteAndPassInfo = function () {
-           // var table = prompt();
+            // var table = prompt();
 
         };
     };
@@ -197,20 +197,33 @@ vertxApp.controller('RegistoCtrl', ['$scope', '$http', '$location', function ($s
 
 
 vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+
         //Fill Fields on pay.html
+        document.getElementById("tablePay").value = tablenowid;
 
-        document.getElementById("tablePay").value = tablenowtotal;
+        document.getElementById("totalPay").value = tablenowtotal;
 
-        document.getElementById("totalPay").value = tablenowid;
+        document.getElementById("productsPay").value = tablenowproducts;
 
-        document.getElementById("productsPay").value = "tablenowproducts";
 
 
         $scope.master = {};
         $scope.activePath = null;
+
+        $scope.payBD = {
+            tablePay: tablenowid.toString(),
+            totalPay: tablenowtotal.toString(),
+            productsPay: tablenowproducts.toString()
+
+        };
+
         $scope.add_new_pay = function (payBD) {
+            payBD.productsPay = tablenowproducts;
+            payBD.totalPay = tablenowtotal;
+            payBD.tablePay = tablenowid;
 
             $http.post('/api/pay', payBD).success(function (data) {
+
                 handlerMensagensToUser(data, "");
                 window.location.href = '#/main';
                 $scope.reset();

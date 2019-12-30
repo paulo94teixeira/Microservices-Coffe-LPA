@@ -63,15 +63,15 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     private JsonObject validatePay(JsonObject payInfo) {
-        String table = payInfo.getString("table");
-        String products = payInfo.getString("products");
+        int table = payInfo.getInteger("tablePay");
+        //JsonObject products = payInfo.getJsonObject("productsPay");
         String name = payInfo.getString("name");
         String NIF = payInfo.getString("NIF");
-        String totalPay = payInfo.getString("totalPay");
+        int totalPay = payInfo.getInteger("totalPay");
 
         logger.info("Pay info");
-        payInfo.put("table", table);
-        payInfo.put("products", products);
+        payInfo.put("tablePay", table);
+       // payInfo.put("productsPay", products);
         payInfo.put("name", name);
         payInfo.put("NIF", NIF);
         payInfo.put("totalPay", totalPay);
