@@ -231,7 +231,7 @@ vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope
                     $scope.reset();
                 } else {
                     var doc = new jsPDF();
-                    doc.text('COFFE LPA', 10, 10);
+                    doc.text('COFFE LPA Invoice', 10, 10);
                     doc.text('Name:', 20, 20);
                     doc.text(25, 30, payBD.name);
                     doc.text('NIF:', 20, 40);
@@ -243,6 +243,8 @@ vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope
                     var uno2_ = document.getElementById("totalPay").value;
                     doc.text(25, 90, uno2_);
                     doc.save('Invoice.pdf');
+                    window.location.href = '#/main';
+                    $scope.reset();
                 }
             });
             $scope.reset = function () {
