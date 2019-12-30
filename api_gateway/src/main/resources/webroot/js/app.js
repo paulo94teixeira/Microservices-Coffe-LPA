@@ -223,10 +223,25 @@ vertxApp.controller('PayCtrl', ['$scope', '$http', '$location', function ($scope
             payBD.tablePay = tablenowid;
 
             $http.post('/api/pay', payBD).success(function (data) {
-
                 handlerMensagensToUser(data, "");
-                window.location.href = '#/main';
-                $scope.reset();
+                var table = prompt("Do you need invoice type YES/NO");
+
+                if (table === 'NO') {
+                    window.location.href = '#/main';
+                    $scope.reset();
+                } else {
+                    var doc = new jsPDF();
+                    doc.text('COFFE LPA', 10, 10);
+                    doc.text('Name:', 20, 20);
+                    doc.text(25, 30, payBD.name);
+                    doc.text('NIF:', 20, 40);
+                    doc.text(payBD.NIF, 25, 50);
+                    doc.text('Products:', 20, 60);
+                    doc.text(payBD.productsPay, 25, 70);
+                    doc.text('Total', 20, 80);
+                    doc.text(payBD.totalPay, 25, 90);
+                    doc.save('Invoice.pdf');
+                }
             });
             $scope.reset = function () {
                 $scope.pay = angular.copy($scope.master);
