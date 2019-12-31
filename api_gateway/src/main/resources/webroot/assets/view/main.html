@@ -7,7 +7,7 @@
         </form>
         <div id="categorias_format" >Products</div>    
         <div ng-repeat="product in products" ng-click="get_all_products(product.id)">
-            <a ng-click="add_product(product)" class="list-group-item list-group-item-action bg-light">{{product.product}}</a>
+            <a ng-click="add_product(product, table.id)" class="list-group-item list-group-item-action bg-light">{{product.product}}</a>
         </div>
         <div id="categorias_format" >Menus</div>  
         <div ng-repeat="menu in menus">

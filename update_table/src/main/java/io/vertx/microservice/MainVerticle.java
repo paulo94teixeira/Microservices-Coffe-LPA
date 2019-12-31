@@ -29,7 +29,7 @@ public class MainVerticle extends AbstractVerticle {
 
         this.eventBus = vertx.eventBus();
 
-        this.eventBus.consumer("/api/updateTable", updateTable());
+        this.eventBus.consumer("/api/updateTable-post", updateTable());
 
         this.eventBus.consumer(EVENT_ADRESS_UPDATE_TABLE, this::getEventAndUpdateDb);
 

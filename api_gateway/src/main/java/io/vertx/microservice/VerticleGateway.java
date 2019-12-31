@@ -142,7 +142,8 @@ public class VerticleGateway extends AbstractVerticle {
 
     private void updateTable(RoutingContext ctx) {
         logger.info("Update table");
-        vertx.eventBus().send("/api/updateTable-post", "", (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
+        JsonObject updateInfo = ctx.getBodyAsJson();
+        vertx.eventBus().send("/api/updateTable-post", updateInfo, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
 
     private void getSessionUserData(RoutingContext ctx) {
