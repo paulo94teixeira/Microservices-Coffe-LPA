@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: get-menus
+    visualize: "true"
+  name: get-menus-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: get-menus
+        visualize: "true"
+    spec:
+      containers:
+        - image: get-menus:{{CONTAINER_VERSION}}
+          name: get-menus
+          ports:
+            - name: hazlecast
+              containerPort: 5701
+              hostPort: 5701

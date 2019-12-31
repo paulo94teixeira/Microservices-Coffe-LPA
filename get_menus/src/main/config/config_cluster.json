@@ -1,0 +1,7 @@
+{
+  "local":true,
+  "host": "localhost",
+  "port": 8080,
+  "db_name": "menus",
+  "connection_string": "mongodb://10.96.4.244:27017"
+}

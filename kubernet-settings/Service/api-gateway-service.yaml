@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: api-gateway
+    visualize: "true"
+    service-name: cluster01
+  name: api-gateway
+spec:
+  type: LoadBalancer
+  ports:
+    - name: api-gateway
+      port: 80
+      targetPort: 8080
+    - name: hazelcast
+      port: 5701
+  selector:
+    name: api-gateway

@@ -1,0 +1,21 @@
+# HTTP to Hazelcast Management Center
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: hazelcast-management-center
+    visualize: "true"
+    service-name: cluster01
+  name: hazelcast-management-center
+spec:
+  type: LoadBalancer
+  clusterIP: 10.96.4.250 # It possible because my-hazelcast-services=10.96.0.0/12
+  ports:
+    - name: mancenter
+      port: 8080
+      targetPort: 8080
+    - name: hazelcast
+      port: 5701
+      targetPort: 5701
+  selector:
+    name: hazelcast-management-center

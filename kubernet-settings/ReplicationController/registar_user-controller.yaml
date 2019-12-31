@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: registar-user
+    visualize: "true"
+  name: registar-user-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: registar-user
+        visualize: "true"
+    spec:
+      containers:
+        - image: registar-user:{{CONTAINER_VERSION}}
+          name: registar-user
+          ports:
+            - name: hazelcast
+              containerPort: 5701

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: update-table
+    visualize: "true"
+  name: update-table-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: update-table
+        visualize: "true"
+    spec:
+      containers:
+        - image: update-table:{{CONTAINER_VERSION}}
+          name: update-table
+          ports:
+            - name: hazlecast
+              containerPort: 5701
+              hostPort: 5701

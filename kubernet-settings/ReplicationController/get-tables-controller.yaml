@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: get-tables
+    visualize: "true"
+  name: get-tables-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: get-tables
+        visualize: "true"
+    spec:
+      containers:
+        - image: get-tables:{{CONTAINER_VERSION}}
+          name: get-tables
+          ports:
+            - name: hazelcast
+              containerPort: 5701

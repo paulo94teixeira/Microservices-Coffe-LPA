@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: hazelcast-management-center
+    visualize: "true"
+  name: hazelcast-management-center-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: hazelcast-management-center
+        visualize: "true"
+    spec:
+      containers:
+        - image: hazelcast/management-center:3.9
+          name: container-hazelcast-management-center
+          ports:
+            - name: mancenter
+              containerPort: 8080
+              hostPort: 8080
+            - name: hazelcast
+              containerPort: 5701
+              hostPort: 5701
+              #hostIP: 10.96.4.250

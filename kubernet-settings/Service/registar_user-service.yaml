@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: registar-user
+    visualize: "true"
+    service-name: cluster01
+  name: registar-user
+spec:
+  ports:
+    - port: 5701
+      targetPort: 5701
+      name: hazelcast
+  selector:
+    name: registar-user

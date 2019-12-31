@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: api-gateway
+    visualize: "true"
+  name: api-gateway-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: api-gateway
+        visualize: "true"
+    spec:
+      containers:
+        - image: api-gateway:{{CONTAINER_VERSION}}
+          name: api-gateway
+          ports:
+            - name: api-gateway
+              containerPort: 8080
+              hostPort: 8080
+            - name: hazlecast
+              containerPort: 5701
+              hostPort: 5701
