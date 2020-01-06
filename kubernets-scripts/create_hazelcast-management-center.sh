@@ -9,8 +9,8 @@ echo "Starting..."
 echo "Creating Hazelcast Management Center..."
 
 kubectl create -f ././../kubernet-settings/Service/hazelcast-management-center-service.yaml
-#kubectl create -f ././../kubernet-settings/Deployment/hazelcast-management-center-deployment.yaml
-kubectl create -f ././../kubernet-settings/ReplicationController/hazelcast-management-center-controller.yaml
+kubectl create -f ././../kubernet-settings/Deployment/hazelcast-management-center-deployment.yaml
+#kubectl create -f ././../kubernet-settings/ReplicationController/hazelcast-management-center-controller.yaml
 
 echo "Hazelcast Management Center podes status"
 kubectl get pods

@@ -1,22 +1,24 @@
 apiVersion: apps/v1
-kind: ReplicationController
+kind: Deployment
 metadata:
   labels:
-    name: update-table
+    app: update-table
     visualize: "true"
-  name: update-table-controller
+  name: update-table-deployment
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: update-table
   template:
     metadata:
       labels:
-        name: update-table
+        app: update-table
         visualize: "true"
     spec:
       containers:
         - image: update-table:{{CONTAINER_VERSION}}
           name: update-table
           ports:
-            - name: hazlecast
+            - name: hazelcast #Limit 15 characters
               containerPort: 5701
-              hostPort: 5701

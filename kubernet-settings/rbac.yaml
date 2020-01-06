@@ -11,4 +11,4 @@ subjects:
     name: default
     namespace: default
 
-## kubectl apply -f rbac.yaml
+## kubectl apply -f rbac.yaml 

@@ -1,16 +1,19 @@
 apiVersion: apps/v1
-kind: ReplicationController
+kind: Deployment
 metadata:
   labels:
-    name: api-gateway
+    app: api-gateway
     visualize: "true"
-  name: api-gateway-controller
+  name: api-gateway
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
   template:
     metadata:
       labels:
-        name: api-gateway
+        app: api-gateway
         visualize: "true"
     spec:
       containers:

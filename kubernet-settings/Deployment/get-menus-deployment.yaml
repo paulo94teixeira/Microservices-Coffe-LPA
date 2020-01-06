@@ -1,22 +1,24 @@
 apiVersion: apps/v1
-kind: ReplicationController
+kind: Deployment
 metadata:
   labels:
-    name: get-menus
+    app: get-menus
     visualize: "true"
-  name: get-menus-controller
+  name: get-menus-deployment
 spec:
+  selector:
+    matchLabels:
+      app: get-menus
   replicas: 1
   template:
     metadata:
       labels:
-        name: get-menus
+        app: get-menus
         visualize: "true"
     spec:
       containers:
         - image: get-menus:{{CONTAINER_VERSION}}
           name: get-menus
           ports:
-            - name: hazlecast
+            - name: hazelcast #Limit 15 characters
               containerPort: 5701
-              hostPort: 5701

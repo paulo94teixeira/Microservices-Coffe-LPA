@@ -1,21 +1,24 @@
 apiVersion: apps/v1
-kind: ReplicationController
+kind: Deployment
 metadata:
   labels:
-    name: get-tables
+    app: get-tables
     visualize: "true"
-  name: get-tables-controller
+  name: get-tables-deployment
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: get-tables
   template:
     metadata:
       labels:
-        name: get-tables
+        app: get-tables
         visualize: "true"
     spec:
       containers:
         - image: get-tables:{{CONTAINER_VERSION}}
           name: get-tables
           ports:
-            - name: hazelcast
+            - name: hazelcast #Limit 15 characters
               containerPort: 5701

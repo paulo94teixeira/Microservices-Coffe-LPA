@@ -4,7 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Create Services:"
 
-kubectl create -f$DIR/../../kubernet-settings/Service/reporting-service.yaml
+kubectl create -f $DIR/../../kubernet-settings/Service/reporting-service.yaml
 
 kubectl create -f $DIR/../../kubernet-settings/Service/api-gateway-service.yaml
 

@@ -15,7 +15,6 @@ echo "Creating Cluster..."
 #  --tags=hazelcast-cluster
 echo "Cluster created."
 
-# gcloud compute instances list
 # kubectl get pods
 
 echo "Show services:"

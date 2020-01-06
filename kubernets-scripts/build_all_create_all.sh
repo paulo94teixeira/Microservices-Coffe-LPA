@@ -47,10 +47,10 @@ echo "Building docker containers..."" & make shure docker is running in your loc
 echo "Containers build.."
 
 #echo "Create the replication controllers:"
-./create_Scripts/create_replicationControllers.sh "-v=$IMAGE_VERSION"
+#./create_Scripts/create_replicationControllers.sh "-v=$IMAGE_VERSION"
 
 #echo "Create the Deployment:"
-#create_Scripts/create_deployment.sh "-v=$IMAGE_VERSION" # Create some erros on connection with service pod not linked
+create_Scripts/create_deployment.sh "-v=$IMAGE_VERSION" # Create some erros on connection with service pod not linked
 
 # Cluster auto Scaling
 # kubectl autoscale deployment my-app --max 6 --min 4 --cpu-percent 50

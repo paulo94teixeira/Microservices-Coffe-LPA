@@ -6,7 +6,7 @@ instead of pushing yout Docker image to a registry, you can build the image usin
 To stop using:
 > eval$(minikube docker-env -u)
 
-Remover todo o cluster Minikube:
+Remover tudo do cluster Minikube:
 > minikube delete
 
 Criar um novo cluster Minikube:
@@ -43,21 +43,10 @@ OR (Default build & deploy is true & version is v01)
 
 > ./build_all_create_all.sh -v=v01
 
-Update all pods of Deployment:
-- v02 is the number of version tag
-> ./update_all_containers.sh --version=v02 --build=true--update=true --replication=false
-
-Update all pods of ReplicationController(Rolling update):
-- v02 is the number of version tag
-> ./update_all_containers.sh -v=v02 -b=true -u=true -r=true
-
 Delete all Replication Controllers and Build all again with new forced version:
 - v02 is the number of version tag
 > ./delete_all_ReplicationControllers.sh \
 > ./build_all_create_all.sh -v=v02 -b=true
-
-To delete the entire cluster and network:
-
 
 
 

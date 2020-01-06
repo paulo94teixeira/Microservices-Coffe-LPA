@@ -27,21 +27,21 @@ cat $DIR/../../kubernet-settings/Deployment/api-gateway-deployment.yaml | sed "s
 cat $DIR/../../kubernet-settings/Deployment/registar_user-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
 #kubectl create -f $DIR/../../kubernet-settings/Deployment/login-deployment.yaml
-cat $DIR/../../kubernet-settings/Deployment/Deployment/login-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+cat $DIR/../../kubernet-settings/Deployment/login-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
 #kubectl create -f $DIR/../../kubernet-settings/Deployment/get-menus-deployment.yaml
-cat $DIR/../../kubernet-settings/Deployment/Deployment/get-menus-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+cat $DIR/../../kubernet-settings/Deployment/get-menus-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
 #kubectl create -f $DIR/../../kubernet-settings/Deployment/get-products-deployment.yaml
-cat $DIR/../../kubernet-settings/Deployment/Deployment/get-products-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+cat $DIR/../../kubernet-settings/Deployment/get-products-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
 #kubectl create -f $DIR/../../kubernet-settings/Deployment/get-tables-deployment.yaml
-cat $DIR/../../kubernet-settings/Deployment/Deployment/get-tables-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+cat $DIR/../../kubernet-settings/Deployment/get-tables-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
 #kubectl create -f $DIR/../../kubernet-settings/Deployment/pay_build-deployment.yaml
 cat $DIR/../../kubernet-settings/Deployment/pay_build-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
-#kubectl create -f $DIR/../../kubernet-settings/Deployment/update_table-deployment.yaml
-cat $DIR/../../kubernet-settings/Deployment/update_table-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+#kubectl create -f $DIR/../../kubernet-settings/Deployment/update-table-deployment.yaml
+cat $DIR/../../kubernet-settings/Deployment/update-table-deployment.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
 echo "Done."

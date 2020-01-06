@@ -26,6 +26,6 @@ done
 
 if $BUILD; then
     echo "Building update-table:"
-    docker build -t user-pacote:$IMAGE_VERSION $DIR/../../update_table/
+    docker build -t update-table:$IMAGE_VERSION $DIR/../../update_table/
 fi
 

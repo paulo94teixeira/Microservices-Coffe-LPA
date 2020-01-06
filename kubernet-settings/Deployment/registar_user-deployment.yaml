@@ -1,21 +1,24 @@
 apiVersion: apps/v1
-kind: ReplicationController
+kind: Deployment
 metadata:
   labels:
-    name: get-tables
+    app: registar-user
     visualize: "true"
-  name: get-tables-controller
+  name: registar-user-deployment
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: registar-user
   template:
     metadata:
       labels:
-        name: get-tables
+        app: registar-user
         visualize: "true"
     spec:
       containers:
-        - image: get-tables:{{CONTAINER_VERSION}}
-          name: get-tables
+        - image: registar-user:{{CONTAINER_VERSION}}
+          name: registar-user
           ports:
             - name: hazelcast
               containerPort: 5701

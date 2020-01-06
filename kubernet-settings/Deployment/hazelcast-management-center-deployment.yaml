@@ -1,16 +1,19 @@
 apiVersion: apps/v1
-kind: ReplicationController
+kind: Deployment
 metadata:
   labels:
-    name: hazelcast-management-center
+    app: hazelcast-management-center
     visualize: "true"
-  name: hazelcast-management-center-controller
+  name: hazelcast-management-center
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: hazelcast-management-center
   template:
     metadata:
       labels:
-        name: hazelcast-management-center
+        app: hazelcast-management-center
         visualize: "true"
     spec:
       containers:
@@ -23,4 +26,3 @@ spec:
             - name: hazelcast
               containerPort: 5701
               hostPort: 5701
-              #hostIP: 10.96.4.250
