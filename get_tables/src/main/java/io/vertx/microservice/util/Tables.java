@@ -31,15 +31,15 @@ public class Tables {
 
     public ArrayList<Tables> Fill_tables() {
         ArrayList<Tables> tables = new ArrayList<>();
-        tables.add(new Tables(1, "Table 1"));
-        tables.add(new Tables(2, "Table 2"));
-        tables.add(new Tables(3, "Table 3"));
-        tables.add(new Tables(4, "Table 4"));
+        tables.add(new Tables(1, "Table 1", "Coffee", 1));
+        tables.add(new Tables(2, "Table 2", "Chocolate", 1));
+        tables.add(new Tables(3, "Table 3", "Water, Toast", 3));
+        tables.add(new Tables(4, "Table 4", "Coffe", 1));
         tables.add(new Tables(5, "Table 5"));
         tables.add(new Tables(6, "Table 6"));
-        tables.add(new Tables(7, "Table 7"));
+        tables.add(new Tables(7, "Table 7", "Chocolate, Cakes, Toast", 10));
         tables.add(new Tables(8, "Table 8"));
-        tables.add(new Tables(9, "Table 9"));
+        tables.add(new Tables(9, "Table 9", "Coffe + Cakes, Pizza", 7));
         tables.add(new Tables(10, "Table 10", "Coffe, Pizza", 10));
         return tables;
     }

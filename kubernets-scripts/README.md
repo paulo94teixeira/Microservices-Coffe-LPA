@@ -47,6 +47,8 @@ Delete all Replication Controllers and Build all again with new forced version:
 - v02 is the number of version tag
 > ./delete_all_ReplicationControllers.sh \
 > ./build_all_create_all.sh -v=v02 -b=true
+> minikube tunnel
+
 
 
 

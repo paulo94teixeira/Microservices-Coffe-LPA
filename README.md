@@ -31,4 +31,4 @@ reporting em JSON.
 ##Run app local machine
 
 ./script_run to run
-./script_clean to stop
+./script_stop to stop
