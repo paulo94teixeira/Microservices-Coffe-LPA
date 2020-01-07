@@ -42,6 +42,7 @@ reporting em JSON.
 - Java 8
 - MongoDB
 - Maven Apache
+- Git bash
 ```
 
 # Run app local machine
