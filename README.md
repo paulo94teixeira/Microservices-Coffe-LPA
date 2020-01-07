@@ -34,8 +34,7 @@ o Git
 reporting em JSON.
 ```
 
-# Para poder executar o projeto deve ter instalado na sua máquina os seguintes softwares 
-# e adicionar as respetivas variaveis de ambiente:
+# Para poder executar o projeto deve ter instalado na sua máquina os seguintes softwares e adicionar as respetivas variaveis de ambiente:
 
 ```
 - Docker
