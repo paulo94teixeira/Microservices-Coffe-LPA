@@ -1,5 +1,11 @@
 # Microservices-Coffe-LPA Project MEI ESTG IPP MTADS
 
+## Identificação do Intervenientes
+```
+• Letícia Ribeiro Nº8190011
+• Paulo Teixeira Nº8150524
+```
+
 ## Objetivos
 ```
 • Conceber a arquitetura técnica de um projeto segundo o paradigma micro-serviços;
