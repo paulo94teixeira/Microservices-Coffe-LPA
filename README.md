@@ -28,7 +28,17 @@ o Git
 reporting em JSON.
 ```
 
-##Run app local machine
+#Run app local machine
 
 ./script_run to run
 ./script_stop to stop
+
+#Run app kubernetes
+   
+Aceder à pasta kubernets-scripts e executar os seguintes comandos/scripts
+
+```
+./create_mongoDB.sh
+./create_hazelcast-management-center.sh
+./build_all_create_all.sh -v=v01 -b=true
+```
