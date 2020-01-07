@@ -28,12 +28,12 @@ o Git
 reporting em JSON.
 ```
 
-#Run app local machine
+# Run app local machine
 
 ./script_run to run
 ./script_stop to stop
 
-#Run app kubernetes
+# Run app kubernetes
    
 Aceder à pasta kubernets-scripts e executar os seguintes comandos/scripts
 
