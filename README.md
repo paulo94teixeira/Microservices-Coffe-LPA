@@ -57,7 +57,10 @@ reporting em JSON.
 Aceder à pasta kubernets-scripts e executar os seguintes comandos/scripts
 
 ```
+minikube start --cpus=3 --memory=4192
+eval $(minikube docker-env)
 ./create_mongoDB.sh
-./create_hazelcast-management-center.sh
+./create_permissions.sh
 ./build_all_create_all.sh -v=v01 -b=true
+minikube tunnel
 ```
