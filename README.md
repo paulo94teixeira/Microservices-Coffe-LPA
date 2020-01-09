@@ -1,5 +1,11 @@
 # Microservices-Coffe-LPA Project MEI ESTG IPP MTADS
 
+## Identificação do Intervenientes
+```
+• Letícia Ribeiro Nº8190011
+• Paulo Teixeira Nº8150524
+```
+
 ## Objetivos
 ```
 • Conceber a arquitetura técnica de um projeto segundo o paradigma micro-serviços;
@@ -28,7 +34,30 @@ o Git
 reporting em JSON.
 ```
 
-##Run app local machine
+## Para poder executar o projeto deve ter instalado na sua máquina os seguintes softwares e adicionar as respetivas variaveis de ambiente:
 
+```
+- Docker
+- Kubernetes
+- Java 8
+- MongoDB
+- Maven Apache
+- Git bash
+```
+
+# Run app local machine
+
+```
 ./script_run to run
 ./script_stop to stop
+```
+
+# Run app kubernetes
+   
+Aceder à pasta kubernets-scripts e executar os seguintes comandos/scripts
+
+```
+./create_mongoDB.sh
+./create_hazelcast-management-center.sh
+./build_all_create_all.sh -v=v01 -b=true
+```
