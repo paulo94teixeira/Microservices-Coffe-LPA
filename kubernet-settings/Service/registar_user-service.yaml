@@ -4,6 +4,7 @@ metadata:
   labels:
     name: registar-user
     visualize: "true"
+    cluster01: "true"
     service-name: cluster01
   name: registar-user
 spec:

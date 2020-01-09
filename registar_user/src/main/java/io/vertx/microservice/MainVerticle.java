@@ -50,7 +50,7 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     private Handler<Message<JsonObject>> efetuarRegisto() {
-        logger.info("Inicia validacao utilizador");
+        logger.info("Handler efetuarRegisto -- Inicia validacao utilizador");
         return handler -> {
             
             final JsonObject newUser = handler.body();
@@ -60,6 +60,7 @@ public class MainVerticle extends AbstractVerticle {
                 logger.info("Inicia validacao utilizador mongo");
                 if (lookup.failed()) {
                     handler.fail(500, "lookup failed");
+                    logger.info("Mongo lookup failed -> 500");
                     return;
                 }
                 JsonObject user = lookup.result();

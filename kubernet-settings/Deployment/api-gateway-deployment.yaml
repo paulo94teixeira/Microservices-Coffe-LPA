@@ -25,4 +25,4 @@ spec:
               hostPort: 8080
             - name: hazlecast
               containerPort: 5701
-              hostPort: 5701
+              #hostPort: 5701

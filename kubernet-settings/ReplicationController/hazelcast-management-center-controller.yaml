@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
@@ -14,7 +14,7 @@ spec:
         visualize: "true"
     spec:
       containers:
-        - image: hazelcast/management-center:3.9
+        - image: hazelcast/management-center:3.9 #:3.9 ou :3.6
           name: container-hazelcast-management-center
           ports:
             - name: mancenter
@@ -22,5 +22,5 @@ spec:
               hostPort: 8080
             - name: hazelcast
               containerPort: 5701
-              hostPort: 5701
+              #hostPort: 5701
               #hostIP: 10.96.4.250

@@ -22,4 +22,4 @@ spec:
           ports:
             - name: hazlecast
               containerPort: 5701
-              hostPort: 5701
+              #hostPort: 5701

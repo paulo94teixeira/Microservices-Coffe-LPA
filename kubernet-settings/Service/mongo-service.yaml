@@ -4,12 +4,13 @@ metadata:
   labels:
     name: mongo
     visualize: "true"
+    cluster01: "true"
     service-name: cluster01
   name: mongo
 spec:
-  clusterIP: 10.96.4.244 # It possible because my-hazelcast-services=10.96.0.0/12
   ports:
-    - port: 27017
+    - name: mongo
+      port: 27017
       targetPort: 27017
   selector:
     name: mongo

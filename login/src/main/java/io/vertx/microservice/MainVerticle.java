@@ -28,7 +28,7 @@ public class MainVerticle extends AbstractVerticle {
         InitMongoDB db_configuration = new InitMongoDB(vertx, config());
         mongo = db_configuration.initMongoData();
         COLLECTION = db_configuration.getCOLLECTION();
-
+        logger.info("------ LOGIN: getCollection info: "+COLLECTION.toString()+" ------");
         this.eventBus = vertx.eventBus();
 
         this.eventBus.consumer("/api/login-post", getUserLogin());

@@ -23,12 +23,6 @@ cat $DIR/../../kubernet-settings/ReplicationController/reporting-controller.yaml
 #kubectl create -f $DIR/../../kubernet-settings/ReplicationController/api-gateway-controller.yaml
 cat $DIR/../../kubernet-settings/ReplicationController/api-gateway-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
-#kubectl create -f $DIR/../../kubernet-settings/ReplicationController/pay_build-controller.yaml
-cat $DIR/../../kubernet-settings/ReplicationController/pay_build-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
-
-#kubectl create -f $DIR/../../kubernet-settings/ReplicationController/login-controller.yaml
-cat $DIR/../../kubernet-settings/ReplicationController/login-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
-
 #kubectl create -f $DIR/../../kubernet-settings/ReplicationController/get-menus-controller.yaml
 cat $DIR/../../kubernet-settings/ReplicationController/get-menus-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
@@ -38,9 +32,16 @@ cat $DIR/../../kubernet-settings/ReplicationController/get-products-controller.y
 #kubectl create -f $DIR/../../kubernet-settings/ReplicationController/get-tables-controller.yaml
 cat $DIR/../../kubernet-settings/ReplicationController/get-tables-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
+#kubectl create -f $DIR/../../kubernet-settings/ReplicationController/login-controller.yaml
+cat $DIR/../../kubernet-settings/ReplicationController/login-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+
 #kubectl create -f $DIR/../../kubernet-settings/ReplicationController/pay_build-controller.yaml
 cat $DIR/../../kubernet-settings/ReplicationController/pay_build-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
 
+#kubectl create -f $DIR/../../kubernet-settings/ReplicationController/registar_user-controller.yaml
+cat $DIR/../../kubernet-settings/ReplicationController/registar_user-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+
 #kubectl create -f $DIR/../../kubernet-settings/ReplicationController/update-table-controller.yaml
 cat $DIR/../../kubernet-settings/ReplicationController/update-table-controller.yaml | sed "s/{{CONTAINER_VERSION}}/$IMAGE_VERSION/g" | kubectl apply -f -
+
 echo "Done."

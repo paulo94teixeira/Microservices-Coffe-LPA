@@ -4,6 +4,7 @@ metadata:
   labels:
     name: pay-build
     visualize: "true"
+    cluster01: "true"
     service-name: cluster01
   name: pay-build
 spec:

@@ -11,7 +11,7 @@ echo "Creating Cluster..."
 
 # Cluster auto Scaling
 ##TODO Validar o autoscale
-# kubectl autoscale deployment my-app --max 6 --min 4 --cpu-percent 50
+# kubectl autoscale deployment api-gateway --max 6 --min 4 --cpu-percent 50
 #  --tags=hazelcast-cluster
 echo "Cluster created."
 

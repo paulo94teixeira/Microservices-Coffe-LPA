@@ -120,6 +120,7 @@ public class VerticleGateway extends AbstractVerticle {
     private void novoRegistoUser(RoutingContext ctx) {
         logger.info("New Register--- ");
         JsonObject newUser = ctx.getBodyAsJson();
+        logger.info("-- DEBUG -- jsonobject newUser: "+newUser.toString());
         vertx.eventBus().send("/api/registo-post", newUser, (Handler<AsyncResult<Message<String>>>) responseHandler -> defaultResponse(ctx, responseHandler));
     }
 

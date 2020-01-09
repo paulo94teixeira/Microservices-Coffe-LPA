@@ -22,3 +22,4 @@ spec:
           ports:
             - name: hazelcast #Limit 15 characters
               containerPort: 5701
+              #hostPort: 5701

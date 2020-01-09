@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
@@ -19,4 +19,4 @@ spec:
           ports:
             - name: hazlecast
               containerPort: 5701
-              hostPort: 5701
+              #hostPort: 5701

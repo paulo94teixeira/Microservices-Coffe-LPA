@@ -4,6 +4,7 @@ metadata:
   labels:
     name: reporting
     visualize: "true"
+    cluster01: "true"
     service-name: cluster01
   name: reporting
 spec:

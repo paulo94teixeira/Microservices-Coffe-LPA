@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
@@ -17,5 +17,6 @@ spec:
         - image: pay-build:{{CONTAINER_VERSION}}
           name: pay-build
           ports:
-            - name: hazelcast
+            - name: hazlecast
               containerPort: 5701
+              #hostPort: 5701

@@ -8,8 +8,8 @@ metadata:
     service-name: cluster01
   name: hazelcast-management-center
 spec:
-  type: LoadBalancer
-  clusterIP: 10.96.4.245 # It possible because my-hazelcast-services=10.96.0.0/12
+  #type: LoadBalancer
+  #clusterIP: 10.96.4.245 # It possible because my-hazelcast-services=10.96.0.0/12
   ports:
     - name: mancenter
       port: 8080
