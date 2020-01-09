@@ -18,7 +18,7 @@ desenvolvimento de arquitetura baseadas em micro-serviços.
 ## Recursos
 ```
 • Minikube
-• Kubernetes
+• Kurbenetes
 • Git Hub
 • Google Cloud Platform
 • Opções para o desenvolvimento dos microserviços (Vert.x)
