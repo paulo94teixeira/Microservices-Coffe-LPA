@@ -31,7 +31,7 @@ After build: mvn clean install
 chmod +x create_mongoDB.sh \
 chmod +x create_Kubernets_cluster.sh \
 chmod +x build_all_create_all.sh \
-chmod +x create_hazelcast-management-center.sh \
+chmod +x create_permissions.sh \
 chmod +x delete_all_ReplicationControllers.sh \
 chmod +x build_Scripts/*.sh \
 chmod +x create_Scripts/*.sh \
@@ -42,14 +42,14 @@ chmod +x create_Scripts/*.sh \
 ```
 eval $(minikube docker-env)
 ./create_mongoDB.sh \
-./create_hazelcast-management-center.sh \
+./create_permissions.sh \
 ./build_all_create_all.sh -v=v01 -b=true
 minikube tunnel
 ```
 
-Delete all Replication Controllers and Build all again with new forced version:
+Delete all and Build all again with new forced version:
 ```
-./delete_all_ReplicationControllers.sh \
+./delete_all
 ./build_all_create_all.sh -v=v02 -b=true
 ```
 

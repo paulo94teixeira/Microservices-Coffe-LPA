@@ -4,9 +4,7 @@ set -e
 # Get this script directory (to find yml from any directory)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Starting..."
-
-echo "Grant access to kubernets API -- hazelcast "
+echo "Grant access to kubernets API**********************"
 kubectl apply -f $DIR/../kubernet-settings/rbac.yaml
 
 #TODO alterar futuramente?
@@ -19,7 +17,7 @@ kubectl apply -f $DIR/../kubernet-settings/rbac.yaml
 ##kubectl create -f ././../kubernet-settings/Deployment/hazelcast-management-center-deployment.yaml
 #kubectl create -f ././../kubernet-settings/ReplicationController/hazelcast-management-center-controller.yaml
 
-echo "Hazelcast Management Center podes status"
+echo "Pods status ******************************"
 kubectl get pods
 
 echo "Done."
