@@ -1,4 +1,4 @@
-# Eclipse template
+# Eclipse/intellij template
 .metadata
 bin/
 tmp/
@@ -11,6 +11,7 @@ local.properties
 .loadpath
 .recommenders
 .classpath
+.idea
 
 # Package Files
 *.jar
