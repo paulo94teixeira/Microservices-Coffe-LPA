@@ -28,8 +28,8 @@ desenvolvimento de arquitetura baseadas em micro-serviços.
 ```
 De acordo com as instruções fornecidas nas aulas, deverá garantir a correta instalação e
 configuração do ambiente de desenvolvimento usando as tecnologias:
-o Vagrant
-o Git
+• Vagrant
+• Git
 • Deverão conceber a aplicação com um serviço que forneça pelo menos um dataset para
 reporting em JSON.
 ```
